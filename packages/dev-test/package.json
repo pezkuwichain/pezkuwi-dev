@@ -1,0 +1,30 @@
+{
+  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "bugs": "https://github.com/pezkuwi/dev/issues",
+  "description": "A basic test-functions-as-global library on top of node:test",
+  "engines": {
+    "node": ">=18.14"
+  },
+  "homepage": "https://github.com/pezkuwi/dev/tree/master/packages/dev-test#readme",
+  "license": "Apache-2.0",
+  "name": "@pezkuwi/dev-test",
+  "repository": {
+    "directory": "packages/dev-test",
+    "type": "git",
+    "url": "https://github.com/pezkuwi/dev.git"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "version": "0.84.2",
+  "main": "./index.js",
+  "exports": {
+    "./globals.d.ts": "./src/globals.d.ts"
+  },
+  "dependencies": {
+    "jsdom": "^24.0.0",
+    "tslib": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.6"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  /**
+   * There uses the strictest configs as the base
+   * https://github.com/tsconfig/bases/blob/f674fa6cbca17062ff02511b02872f8729a597ec/bases/strictest.json
+   */
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    /**
+     * Aligns with packages/dev/scripts/polkadot-dev-build-ts & packages/dev-ts/src/loader
+     * (target here is specifically tied to the minimum supported Node version)
+     */
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2022",
+
+    /**
+     * Specific compilation configs for polkadot-js projects as it is used
+     * (we only compile *.d.ts via the tsc command-line)
+     */
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "preserve",
+    "verbatimModuleSyntax": true,
+
+    /**
+     * These appear in strictest, however we don't (yet) use them. For the most part it means
+     * that we actually do have a large number of these lurking (especially on index checks)
+     */
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false,
+  }
+}

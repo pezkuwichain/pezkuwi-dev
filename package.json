@@ -1,0 +1,43 @@
+{
+  "author": "Pezkuwi Team <team@pezkuwichain.io>",
+  "bugs": "https://github.com/pezkuwi/dev/issues",
+  "engines": {
+    "node": ">=18.14"
+  },
+  "homepage": "https://github.com/pezkuwichain/pezkuwi-dev#readme",
+  "license": "Apache-2.0",
+  "packageManager": "yarn@4.6.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pezkuwi/dev.git"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "version": "0.84.2",
+  "versions": {
+    "git": "0.84.2",
+    "npm": "0.84.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "polkadot-dev-build-ts",
+    "build:before": "polkadot-dev-copy-dir --cd packages/dev config scripts build",
+    "build:release": "polkadot-ci-ghact-build --skip-beta",
+    "clean": "polkadot-dev-clean-build",
+    "docs": "polkadot-dev-build-docs",
+    "lint": "polkadot-dev-run-lint",
+    "postinstall": "./packages/dev/scripts/polkadot-dev-yarn-only.mjs",
+    "test": "yarn build && polkadot-dev-run-test --dev-build --env browser"
+  },
+  "devDependencies": {
+    "@pezkuwi/dev": "workspace:packages/dev",
+    "@pezkuwi/dev-test": "workspace:packages/dev-test",
+    "@pezkuwi/dev-ts": "workspace:packages/dev-ts"
+  },
+  "resolutions": {
+    "typescript": "^5.5.4"
+  }
+}
