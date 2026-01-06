@@ -15,10 +15,169 @@
   },
   "sideEffects": false,
   "type": "module",
-  "version": "0.84.2",
-  "main": "./index.js",
+  "version": "0.84.3",
+  "main": "./cjs/index.js",
   "exports": {
-    "./globals.d.ts": "./src/globals.d.ts"
+    "./cjs/package.json": "./cjs/package.json",
+    "./cjs/*": "./cjs/*.js",
+    ".": {
+      "module": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "default": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    },
+    "./cached": {
+      "module": {
+        "types": "./cached.d.ts",
+        "default": "./cached.js"
+      },
+      "require": {
+        "types": "./cjs/cached.d.ts",
+        "default": "./cjs/cached.js"
+      },
+      "default": {
+        "types": "./cached.d.ts",
+        "default": "./cached.js"
+      }
+    },
+    "./common": {
+      "module": {
+        "types": "./common.d.ts",
+        "default": "./common.js"
+      },
+      "require": {
+        "types": "./cjs/common.d.ts",
+        "default": "./cjs/common.js"
+      },
+      "default": {
+        "types": "./common.d.ts",
+        "default": "./common.js"
+      }
+    },
+    "./loader": {
+      "module": {
+        "types": "./loader.d.ts",
+        "default": "./loader.js"
+      },
+      "require": {
+        "types": "./cjs/loader.d.ts",
+        "default": "./cjs/loader.js"
+      },
+      "default": {
+        "types": "./loader.d.ts",
+        "default": "./loader.js"
+      }
+    },
+    "./package.json": {
+      "require": "./cjs/package.json",
+      "default": "./package.json"
+    },
+    "./packageInfo.js": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./packageInfo": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./resolver": {
+      "module": {
+        "types": "./resolver.d.ts",
+        "default": "./resolver.js"
+      },
+      "require": {
+        "types": "./cjs/resolver.d.ts",
+        "default": "./cjs/resolver.js"
+      },
+      "default": {
+        "types": "./resolver.d.ts",
+        "default": "./resolver.js"
+      }
+    },
+    "./testCached": {
+      "module": {
+        "types": "./testCached.d.ts",
+        "default": "./testCached.js"
+      },
+      "require": {
+        "types": "./cjs/testCached.d.ts",
+        "default": "./cjs/testCached.js"
+      },
+      "default": {
+        "types": "./testCached.d.ts",
+        "default": "./testCached.js"
+      }
+    },
+    "./testLoader": {
+      "module": {
+        "types": "./testLoader.d.ts",
+        "default": "./testLoader.js"
+      },
+      "require": {
+        "types": "./cjs/testLoader.d.ts",
+        "default": "./cjs/testLoader.js"
+      },
+      "default": {
+        "types": "./testLoader.d.ts",
+        "default": "./testLoader.js"
+      }
+    },
+    "./tsconfig": {
+      "module": {
+        "types": "./tsconfig.d.ts",
+        "default": "./tsconfig.js"
+      },
+      "require": {
+        "types": "./cjs/tsconfig.d.ts",
+        "default": "./cjs/tsconfig.js"
+      },
+      "default": {
+        "types": "./tsconfig.d.ts",
+        "default": "./tsconfig.js"
+      }
+    },
+    "./types": {
+      "module": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      },
+      "require": {
+        "types": "./cjs/types.d.ts",
+        "default": "./cjs/types.js"
+      },
+      "default": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      }
+    }
   },
   "dependencies": {
     "json5": "^2.2.3",

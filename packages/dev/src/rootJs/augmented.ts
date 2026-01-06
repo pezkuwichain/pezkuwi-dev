@@ -8,6 +8,6 @@ export interface Something {
   foo: string;
 }
 
-declare module '@polkadot/dev/types' {
+declare module '@pezkuwi/dev/types' {
   const blah: string;
 }

@@ -433,9 +433,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/dev-test@npm:^0.84.2, @polkadot/dev-test@workspace:packages/dev-test":
+"@pezkuwi/dev-test@npm:^0.84.2, @pezkuwi/dev-test@workspace:packages/dev-test":
   version: 0.0.0-use.local
-  resolution: "@polkadot/dev-test@workspace:packages/dev-test"
+  resolution: "@pezkuwi/dev-test@workspace:packages/dev-test"
   dependencies:
     "@types/jsdom": "npm:^21.1.6"
     jsdom: "npm:^24.0.0"
@@ -443,9 +443,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@polkadot/dev-ts@npm:^0.84.2, @polkadot/dev-ts@workspace:packages/dev-ts":
+"@pezkuwi/dev-ts@npm:^0.84.2, @pezkuwi/dev-ts@workspace:packages/dev-ts":
   version: 0.0.0-use.local
-  resolution: "@polkadot/dev-ts@workspace:packages/dev-ts"
+  resolution: "@pezkuwi/dev-ts@workspace:packages/dev-ts"
   dependencies:
     json5: "npm:^2.2.3"
     tslib: "npm:^2.7.0"
@@ -453,13 +453,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@polkadot/dev@workspace:packages/dev":
+"@pezkuwi/dev@workspace:packages/dev":
   version: 0.0.0-use.local
-  resolution: "@polkadot/dev@workspace:packages/dev"
+  resolution: "@pezkuwi/dev@workspace:packages/dev"
   dependencies:
     "@eslint/js": "npm:^8.56.0"
-    "@polkadot/dev-test": "npm:^0.84.2"
-    "@polkadot/dev-ts": "npm:^0.84.2"
+    "@pezkuwi/dev-test": "npm:^0.84.2"
+    "@pezkuwi/dev-ts": "npm:^0.84.2"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^25.0.8"
     "@rollup/plugin-dynamic-import-vars": "npm:^2.1.5"
@@ -7613,9 +7613,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@polkadot/dev": "workspace:packages/dev"
-    "@polkadot/dev-test": "workspace:packages/dev-test"
-    "@polkadot/dev-ts": "workspace:packages/dev-ts"
+    "@pezkuwi/dev": "workspace:packages/dev"
+    "@pezkuwi/dev-test": "workspace:packages/dev-test"
+    "@pezkuwi/dev-ts": "workspace:packages/dev-ts"
   languageName: unknown
   linkType: soft
 

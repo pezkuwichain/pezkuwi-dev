@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=18.14"
   },
-  "homepage": "https://github.com/pezkuwichain/pezkuwi-dev#readme",
+  "homepage": "https://github.com/pezkuwi/dev#readme",
   "license": "Apache-2.0",
   "packageManager": "yarn@4.6.0",
   "private": true,

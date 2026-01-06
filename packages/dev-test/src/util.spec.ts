@@ -1,7 +1,7 @@
-// Copyright 2017-2025 @polkadot/dev-test authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-test authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-/// <reference types="@polkadot/dev-test/globals.d.ts" />
+/// <reference types="@pezkuwi/dev-test/globals.d.ts" />
 
 import { enhanceObj, stubObj, warnObj } from './util.js';
 

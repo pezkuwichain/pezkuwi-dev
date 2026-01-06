@@ -1,7 +1,7 @@
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-/// <reference types="@polkadot/dev-test/globals.d.ts" />
+/// <reference types="@pezkuwi/dev-test/globals.d.ts" />
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -74,7 +74,7 @@ describe('as-built output checks', (): void => {
       idxTypes.forEach((type) =>
         it(`contains import(...) in ${type}`, (): void => {
           expect(
-            jsIdx[type].includes("const { sum } = await import('@polkadot/dev/rootJs/dynamic.mjs');")
+            jsIdx[type].includes("const { sum } = await import('@pezkuwi/dev/rootJs/dynamic.mjs');")
           ).toBe(true);
         })
       );
@@ -86,7 +86,7 @@ describe('as-built output checks', (): void => {
           expect(
             jsIdx[type].includes(
               type === 'cjs'
-                ? 'require("@polkadot/dev/rootJs/testJson.json")'
+                ? 'require("@pezkuwi/dev/rootJs/testJson.json")'
                 // eslint-disable-next-line no-useless-escape
                 : "import testJson from '@pezkuwi/dev/rootJs/testJson.json' assert { type: \'json\' };"
             )

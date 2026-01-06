@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 /** This should appear as-is in the output with: 1. extension added, 2. augmented.d.ts correct */
@@ -20,7 +20,7 @@ export function bigIntExp (): bigint {
 export async function dynamic (a: number, b: number): Promise<number> {
   // NOTE we go via this path so it points to the same location in both ESM
   // and CJS output (a './dynamic' import would be different otherwise)
-  const { sum } = await import('@polkadot/dev/rootJs/dynamic.mjs');
+  const { sum } = await import('@pezkuwi/dev/rootJs/dynamic.mjs');
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return sum(a, b);
