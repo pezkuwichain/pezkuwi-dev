@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -9,7 +9,7 @@ import { execGit, logBin, mkdirpSync } from './util.mjs';
 const tmpDir = 'packages/build';
 const tmpFile = `${tmpDir}/CONTRIBUTORS`;
 
-logBin('polkadot-dev-contrib');
+logBin('pezkuwi-dev-contrib');
 
 mkdirpSync(tmpDir);
 execGit(`shortlog master -e -n -s > ${tmpFile}`);

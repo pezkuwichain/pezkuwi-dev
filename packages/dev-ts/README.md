@@ -1,6 +1,6 @@
 # @pezkuwi/dev-ts
 
-This is an Node TS loader, specifically written to cater for the polkadot-js needs, aka it is meant to be used inside polkadot-js projects. It doesn't aim to be a catch-all resolver, although it does cover quite a large spectrum of functionality.
+This is an Node TS loader, specifically written to cater for the pezkuwi-js needs, aka it is meant to be used inside pezkuwi-js projects. It doesn't aim to be a catch-all resolver, although it does cover quite a large spectrum of functionality.
 
 It caters for -
 
@@ -18,7 +18,7 @@ Just add the loader via the Node.js `--loader` option. The API supported here is
 node --loader @pezkuwi/dev-ts ...
 ```
 
-Internally to the polkadot-js libraries, loader caching is used. This means that compiled files are store on-disk alongside the `/src/` folder in `/build-loader/`. To enable caching behavior, the loader endpoint is changed slightly,
+Internally to the pezkuwi-js libraries, loader caching is used. This means that compiled files are store on-disk alongside the `/src/` folder in `/build-loader/`. To enable caching behavior, the loader endpoint is changed slightly,
 
 ```
 node --loader @pezkuwi/dev-ts/cached ...
@@ -31,7 +31,7 @@ This is generally the suggested default, but it is only exposed via a different 
 
 The Node.js loader API could change in the future (as it has in the Node.js 16.12 version), so it _may_ break or stop working on newer versions, and obviously won't work at all on older versions. As of this writing (Node.js 18.14 being the most-recent LTS), using the `--loader` option will print a warning.
 
-With all that said, it is used as-is for the polkadot-js test infrastructure and currently operates without issues in _that_ environment.
+With all that said, it is used as-is for the pezkuwi-js test infrastructure and currently operates without issues in _that_ environment.
 
 TL;DR Different configs could yield some issues.
 
@@ -44,4 +44,4 @@ We started off with a basic `swc` loader (after swapping the infrastructure from
 
 Since then we just swapped to using base `tsc` everywhere (for all builds) and may look at changing again (swc, esbuild. etc...) in the future. So effectively having a single loader, while re-inventing the wheel somewhat (since there seems to be a _lot_ of options available) allows us to just keep the loader compiling options fully aligned with what TS -> JS output approach we take.
 
-It meets our requirements: aligns fully with the overall configs we accross polkadot-js, compiles to ESM (no CJS used when testing/running) and has minimal dependencies that doesn't add bloat. In most cases you would probably be better off with one of the loaders/registration approaches linked in the first paragraph.
+It meets our requirements: aligns fully with the overall configs we accross pezkuwi-js, compiles to ESM (no CJS used when testing/running) and has minimal dependencies that doesn't add bloat. In most cases you would probably be better off with one of the loaders/registration approaches linked in the first paragraph.

@@ -53,7 +53,7 @@ function extendMock <F extends AnyFn> (mocked: WithMock<F>) {
 /**
  * Sets up the jest object. This is certainly not extensive, and probably
  * not quite meant to be (never say never). Rather this adds the functionality
- * that we use in the polkadot-js projects.
+ * that we use in the pezkuwi-js projects.
  **/
 export function jest () {
   return {

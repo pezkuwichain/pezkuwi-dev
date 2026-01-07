@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import process from 'node:process';
@@ -13,7 +13,7 @@ const EXT_B = ['ts', 'tsx', 'js', 'jsx', 'cjs', 'mjs'];
 // The actual extensions we are looking for
 const EXTS = EXT_A.reduce((/** @type {string[]} */ exts, s) => exts.concat(...EXT_B.map((e) => `.${s}.${e}`)), []);
 
-logBin('polkadot-dev-run-test');
+logBin('pezkuwi-dev-run-test');
 
 exitFatalEngine();
 
@@ -32,7 +32,7 @@ let isDev = false;
 
 for (let i = 0; i < args.length; i++) {
   switch (args[i]) {
-    // when running inside a dev environment, specifically @polkadot/dev
+    // when running inside a dev environment, specifically @pezkuwi/dev
     case '--dev-build':
       isDev = true;
       break;
@@ -148,16 +148,16 @@ if (files.length === 0) {
 }
 
 try {
-  const allFlags = `${importPath('@polkadot/dev/scripts/polkadot-exec-node-test.mjs')} ${[...cmd, ...files].join(' ')}`;
+  const allFlags = `${importPath('@pezkuwi/dev/scripts/pezkuwi-exec-node-test.mjs')} ${[...cmd, ...files].join(' ')}`;
 
   nodeFlags.push('--require');
   nodeFlags.push(
     isDev
       ? `./packages/dev-test/build/cjs/${testEnv}.js`
-      : `@polkadot/dev-test/${testEnv}`
+      : `@pezkuwi/dev-test/${testEnv}`
   );
 
-  execNodeTs(allFlags, nodeFlags, false, isDev ? './packages/dev-ts/build/testCached.js' : '@polkadot/dev-ts/testCached');
+  execNodeTs(allFlags, nodeFlags, false, isDev ? './packages/dev-ts/build/testCached.js' : '@pezkuwi/dev-ts/testCached');
 } catch {
   process.exit(1);
 }

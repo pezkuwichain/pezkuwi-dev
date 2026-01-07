@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // For Node 18, earliest usable is 18.14:
@@ -186,7 +186,7 @@ function complete () {
 
       if (typeof r === 'string') {
         console.log(r); // Node.js <= 18.14
-      } else if (r.file && r.file.includes('@polkadot/dev/scripts')) {
+      } else if (r.file && r.file.includes('@pezkuwi/dev/scripts')) {
         // Ignore internal diagnostics
       } else {
         if (lastFilename !== r.file) {

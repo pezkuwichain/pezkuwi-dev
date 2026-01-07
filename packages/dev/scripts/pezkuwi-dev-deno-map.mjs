@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -18,7 +18,7 @@ const [e, i] = fs
   }, [[], {}]);
 
 if (!fs.existsSync('mod.ts')) {
-  fs.writeFileSync('mod.ts', `// Copyright 2017-${new Date().getFullYear()} @polkadot/dev authors & contributors\n// SPDX-License-Identifier: Apache-2.0\n\n// auto-generated via polkadot-dev-deno-map, do not edit\n\n// This is a Deno file, so we can allow .ts imports
+  fs.writeFileSync('mod.ts', `// Copyright 2017-${new Date().getFullYear()} @pezkuwi/dev authors & contributors\n// SPDX-License-Identifier: Apache-2.0\n\n// auto-generated via pezkuwi-dev-deno-map, do not edit\n\n// This is a Deno file, so we can allow .ts imports
   /* eslint-disable import/extensions */\n\n${e.join('\n')}\n`);
 }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -12,10 +12,10 @@ import { copyDirSync, copyFileSync, denoCreateDir, execGit, execPm, execSync, ex
 
 /** @typedef {Record<string, any>} ChangelogMap */
 
-logBin('polkadot-ci-ghact-build');
+logBin('pezkuwi-ci-ghact-build');
 
-const DENO_REPO = 'polkadot-js/build-deno.land';
-const BUND_REPO = 'polkadot-js/build-bundle';
+const DENO_REPO = 'pezkuwi-js/build-deno.land';
+const BUND_REPO = 'pezkuwi-js/build-bundle';
 
 const repo = `${GITHUB_TOKEN_URL}/${GITHUB_REPO}.git`;
 const denoRepo = `${GITHUB_TOKEN_URL}/${DENO_REPO}.git`;
@@ -305,14 +305,14 @@ function commitClone (repo, clone, names) {
 }
 
 /**
- * Publishes a specific package to polkadot-js bundles
+ * Publishes a specific package to pezkuwi-js bundles
  *
  * @returns {void}
  */
 function bundlePublishPkg () {
   const { name, version } = npmGetJson();
   const dirName = name.split('/')[1];
-  const bundName = `bundle-polkadot-${dirName}.js`;
+  const bundName = `bundle-pezkuwi-${dirName}.js`;
   const srcPath = path.join('build', bundName);
   const dstDir = path.join('../..', bundClone);
 
@@ -333,7 +333,7 @@ function bundlePublishPkg () {
 }
 
 /**
- * Publishes all packages to polkadot-js bundles
+ * Publishes all packages to pezkuwi-js bundles
  *
  * @returns {void}
  */
@@ -419,7 +419,7 @@ function verBump () {
 
   if (argv['skip-beta'] || patch === '0') {
     // don't allow beta versions
-    execPm('polkadot-dev-version patch');
+    execPm('pezkuwi-dev-version patch');
     withNpm = true;
   } else if (tag || currentVersion === lastVersion) {
     // if we don't want to publish, add an X before passing
@@ -430,7 +430,7 @@ function verBump () {
     }
 
     // beta version, just continue the stream of betas
-    execPm('polkadot-dev-version pre');
+    execPm('pezkuwi-dev-version pre');
   } else {
     // manually set, got for publish
     withNpm = true;
@@ -440,7 +440,7 @@ function verBump () {
   npmSetVersionFields();
   rmFile('.123trigger');
 
-  execPm('polkadot-dev-contrib');
+  execPm('pezkuwi-dev-contrib');
   execGit('add --all .');
 }
 
@@ -484,7 +484,7 @@ skip-checks: true"`);
       ? `--assets ${process.env['GH_RELEASE_FILES']}`
       : '';
 
-    execPm(`polkadot-exec-ghrelease --draft ${files} --yes`);
+    execPm(`pezkuwi-exec-ghrelease --draft ${files} --yes`);
   }
 }
 
@@ -526,7 +526,7 @@ getFlags();
 verBump();
 
 // perform the actual CI build
-execPm('polkadot-dev-clean-build');
+execPm('pezkuwi-dev-clean-build');
 execPm('lint');
 execPm('test');
 execPm('build');

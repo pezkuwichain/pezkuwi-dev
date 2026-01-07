@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import { copyDirSync, exitFatal, logBin } from './util.mjs';
@@ -26,7 +26,7 @@ for (let i = 0; i < argv.length; i++) {
 const sources = args.slice(0, args.length - 1);
 const dest = args[args.length - 1];
 
-logBin('polkadot-dev-copy-dir');
+logBin('pezkuwi-dev-copy-dir');
 
 if (!sources || !dest) {
   exitFatal('Expected at least one <source>... and one <destination> argument');

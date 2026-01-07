@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -151,7 +151,7 @@ function findPackages (dir) {
 
       // for dev we want to pull through the additionals, i.e. we want to
       // align deps found in dev/others with those in dev as master
-      if (pkgJson.name === '@polkadot/dev') {
+      if (pkgJson.name === '@pezkuwi/dev') {
         PKG_PATHS.forEach((depPath) => {
           Object
             .entries(pkgJson[depPath] || {})

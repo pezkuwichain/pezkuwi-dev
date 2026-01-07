@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev-ts authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { LoaderOptions } from './types.js';
@@ -25,7 +25,7 @@ export const EXT_TS_REGEX = /\.tsx?$/;
 /** RegEx for matching JS files (imports map to TS) */
 export const EXT_JS_REGEX = /\.jsx?$/;
 
-/** RegEx for json files (as actually aliassed in polkadot-js) */
+/** RegEx for json files (as actually aliassed in pezkuwi-js) */
 export const EXT_JSON_REGEX = /\.json$/;
 
 /** Options for loader config */

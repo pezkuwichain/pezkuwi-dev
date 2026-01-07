@@ -30,10 +30,10 @@ describe('as-built output checks', (): void => {
 
     it('has the static files copied (non-duplicated)', (): void => {
       expect(
-        fs.existsSync(path.join(buildRoot, 'rootStatic/kusama.svg'))
+        fs.existsSync(path.join(buildRoot, 'rootStatic/zagros.svg'))
       ).toBe(true);
       expect(
-        fs.existsSync(path.join(buildRoot, 'cjs/rootStatic/kusama.svg'))
+        fs.existsSync(path.join(buildRoot, 'cjs/rootStatic/zagros.svg'))
       ).toBe(false);
     });
 
@@ -136,7 +136,7 @@ describe('as-built output checks', (): void => {
       expect(
         fs
           .readFileSync(path.join(denoRoot, 'rootJs/augmented.ts'))
-          .includes("declare module 'https://deno.land/x/polkadot/dev/types.ts' {")
+          .includes("declare module 'https://deno.land/x/pezkuwi/dev/types.ts' {")
       ).toBe(true);
     });
 

@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import JSON5 from 'json5';
@@ -39,8 +39,8 @@ function getHeaderPattern () {
   const packages = paths.reduce((packages, k) => {
     const [pd, pk] = k.split('/');
 
-    if (pd !== '@polkadot' || !pk) {
-      throw new Error(`Non @polkadot path in ${tsPath}`);
+    if (pd !== '@pezkuwi' || !pk) {
+      throw new Error(`Non @pezkuwi path in ${tsPath}`);
     }
 
     return packages.length
@@ -54,7 +54,7 @@ function getHeaderPattern () {
     years.push(`${i}`);
   }
 
-  return ` Copyright 20(${years.join('|')})(-${fullyear})? @polkadot/(${packages})`;
+  return ` Copyright 20(${years.join('|')})(-${fullyear})? @pezkuwi/(${packages})( authors & contributors)?`;
 }
 
 export const overrideAll = {
@@ -140,10 +140,10 @@ export const overrideAll = {
   'simple-import-sort/imports': ['error', {
     groups: [
       ['^\u0000'], // all side-effects (0 at start)
-      ['\u0000$', '^@polkadot.*\u0000$', '^\\..*\u0000$'], // types (0 at end)
+      ['\u0000$', '^@pezkuwi.*\u0000$', '^\\..*\u0000$'], // types (0 at end)
       // ['^node:'], // node
-      ['^[^/\\.]'], // non-polkadot
-      ['^@polkadot'], // polkadot
+      ['^[^/\\.]'], // non-pezkuwi
+      ['^@pezkuwi'], // pezkuwi
       ['^\\.\\.(?!/?$)', '^\\.\\./?$', '^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'] // local (. last)
     ]
   }],

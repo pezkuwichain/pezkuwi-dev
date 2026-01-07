@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import cp from 'node:child_process';
@@ -19,8 +19,8 @@ export const DENO_EXT_PRE = 'https://esm.sh';
 /** Deno prefix for built-ins */
 export const DENO_LND_PRE = 'https://deno.land';
 
-/** Deno prefix for the polkadot package */
-export const DENO_POL_PRE = `${DENO_LND_PRE}/x/polkadot`;
+/** Deno prefix for the pezkuwi package */
+export const DENO_POL_PRE = `${DENO_LND_PRE}/x/pezkuwi`;
 
 /** The GH user that we use for actions */
 export const GITHUB_USER = 'github-actions[bot]';
@@ -100,7 +100,7 @@ export function copyDirSync (src, dest, include, exclude) {
 export function denoCreateDir (name) {
   // aligns with name above - since we have sub-paths, we only return
   // the actual path inside packages/* (i.e. the last part of the name)
-  return name.replace('@polkadot/', '');
+  return name.replace('@pezkuwi/', '');
 }
 
 /**
@@ -172,7 +172,7 @@ export function execSync (cmd, noLog) {
  * @param {boolean} [noLog]
  * @param {string} [loaderPath]
  **/
-export function execNodeTs (cmd, nodeFlags = [], noLog, loaderPath = '@polkadot/dev-ts/cached') {
+export function execNodeTs (cmd, nodeFlags = [], noLog, loaderPath = '@pezkuwi/dev-ts/cached') {
   const loadersGlo = [];
   const loadersLoc = [];
   const otherFlags = [];
@@ -399,7 +399,7 @@ export function exitFatalEngine () {
 
     console.error(`
         Technical explanation: For a development environment all projects in
-        the @polkadot famility uses node:test in their operation. Currently the
+        the @pezkuwi famility uses node:test in their operation. Currently the
         minimum required version of Node is thus set at the first first version
         with operational support, hence this limitation. Additionally only LTS
         Node versions are supported.
@@ -421,7 +421,7 @@ export function exitFatalYarn () {
       `${BLANK}\n   FATAL: The use of yarn is required, install via npm is not supported.\n${BLANK}`
     );
     console.error(`
-        Technical explanation: All the projects in the @polkadot' family use
+        Technical explanation: All the projects in the @pezkuwi' family use
         yarn specific configs and assume yarn for build operations and locks.
 
         If yarn is not available, you can get it from https://yarnpkg.com/
@@ -504,7 +504,7 @@ export function topoSort (dirs) {
     const deps = JSON.parse(json).dependencies;
 
     return dirs
-      .filter((d) => d !== dir && deps && Object.keys(deps).includes(`@polkadot/${d}`))
+      .filter((d) => d !== dir && deps && Object.keys(deps).includes(`@pezkuwi/${d}`))
       .map((d) => [dir, d]);
   }).flat();
 

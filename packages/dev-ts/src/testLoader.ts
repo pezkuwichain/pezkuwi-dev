@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev-ts authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import crypto from 'node:crypto';
@@ -66,7 +66,7 @@ export async function load (url: string, context: Record<string, unknown>, nextL
         module: ts.ModuleKind.ESNext,
         moduleResolution: ts.ModuleResolutionKind.NodeNext,
         skipLibCheck: true,
-        // Aligns with packages/dev/scripts/polkadot-dev-build-ts & packages/dev/config/tsconfig
+        // Aligns with packages/dev/scripts/pezkuwi-dev-build-ts & packages/dev/config/tsconfig
         target: ts.ScriptTarget.ES2022
       },
       fileName: fileURLToPath(url)

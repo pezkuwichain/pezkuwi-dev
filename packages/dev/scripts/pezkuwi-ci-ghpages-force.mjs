@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
 
 import { execGit, logBin } from './util.mjs';
 
-logBin('polkadot-ci-ghpages-force');
+logBin('pezkuwi-ci-ghpages-force');
 
 // ensure we are on master
 execGit('checkout master');

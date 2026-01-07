@@ -37,7 +37,7 @@ const stubExpectFnNot = stubObj('expect(...).not', EXPECT_KEYS_FN, {
  * A helper that wraps a matching function in an ExpectMatcher. This is (currently)
  * only used/checked for in the calledWith* helpers
  *
- * TODO We don't use it in polkadot-js, but a useful enhancement could be for
+ * TODO We don't use it in pezkuwi-js, but a useful enhancement could be for
  * any of the to* expectations to detect and use those. An example of useful code
  * in that case:
  *
@@ -197,7 +197,7 @@ function assertIncludes (value: string | unknown[], [check, Clazz]: [string, Fun
 /**
  * Sets up the shimmed expect(...) function, including all .to* and .not.to*
  * functions. This is not comprehensive, rather is contains what we need to
- * make all polkadot-js usages pass
+ * make all pezkuwi-js usages pass
  **/
 export function expect () {
   const rootMatchers = {

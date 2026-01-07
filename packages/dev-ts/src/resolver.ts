@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev-ts authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -112,7 +112,7 @@ export function resolveExtJson (specifier: string, parentUrl: URL | string): Res
  *
  * At some point we probably might need to extend this to cater for the
  * ts (recommended) approach for using .js extensions inside the sources.
- * However, since we don't use this in the polkadot-js code, can kick this
+ * However, since we don't use this in the pezkuwi-js code, can kick this
  * down the line
  **/
 export function resolveExtBare (specifier: string, parentUrl: URL | string): Resolved | void {

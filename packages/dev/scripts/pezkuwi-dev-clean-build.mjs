@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -10,7 +10,7 @@ import { logBin, PATHS_BUILD, rimrafSync } from './util.mjs';
 const PKGS = path.join(process.cwd(), 'packages');
 const DIRS = PATHS_BUILD.map((d) => `build${d}`);
 
-logBin('polkadot-dev-clean-build');
+logBin('pezkuwi-dev-clean-build');
 
 /**
  * @internal

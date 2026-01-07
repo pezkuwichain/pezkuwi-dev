@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // @ts-expect-error For scripts we don't include @types/* definitions
@@ -7,7 +7,7 @@ import madge from 'madge';
 
 import { exitFatal, logBin } from './util.mjs';
 
-logBin('polkadot-dev-circular');
+logBin('pezkuwi-dev-circular');
 
 const res = await madge('./', { fileExtensions: ['ts', 'tsx'] });
 

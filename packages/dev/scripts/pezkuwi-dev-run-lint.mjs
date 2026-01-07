@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import process from 'node:process';
@@ -9,7 +9,7 @@ import { __dirname, execPm, GITHUB_REPO, logBin } from './util.mjs';
 
 const TS_CONFIG_BUILD = true;
 
-logBin('polkadot-dev-run-lint');
+logBin('pezkuwi-dev-run-lint');
 
 // Since yargs can also be a promise, we just relax the type here completely
 const argv = await yargs(process.argv.slice(2))
@@ -32,9 +32,9 @@ if (!argv['skip-eslint']) {
     ? ''
     : '--fix';
 
-  execPm(`polkadot-exec-eslint ${extra} ${process.cwd()}`);
+  execPm(`pezkuwi-exec-eslint ${extra} ${process.cwd()}`);
 }
 
 if (!argv['skip-tsc']) {
-  execPm(`polkadot-exec-tsc --noEmit --emitDeclarationOnly false --pretty${TS_CONFIG_BUILD ? ' --project tsconfig.build.json' : ''}`);
+  execPm(`pezkuwi-exec-tsc --noEmit --emitDeclarationOnly false --pretty${TS_CONFIG_BUILD ? ' --project tsconfig.build.json' : ''}`);
 }

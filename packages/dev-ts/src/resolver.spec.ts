@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev-ts authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 /// <reference types="@pezkuwi/dev-test/globals.d.ts" />
@@ -124,7 +124,7 @@ describe('resolveExtBare', () => {
 describe('resolveAliases', () => {
   it('resolves packageInfo', () => {
     expect(
-      resolveAlias('@polkadot/dev-ts/packageInfo', ROOT_URL)
+      resolveAlias('@pezkuwi/dev-ts/packageInfo', ROOT_URL)
     ).toEqual({
       format: 'module',
       shortCircuit: true,

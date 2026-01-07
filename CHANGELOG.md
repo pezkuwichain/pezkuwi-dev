@@ -8,7 +8,7 @@
 
 ## 0.83.1
 
-- Parallelize the tests in `polkadot-exec-node-test`
+- Parallelize the tests in `pezkuwi-exec-node-test`
 
 
 ## 0.82.1
@@ -195,7 +195,7 @@
 
 - Remove `@pezkuwi/dev-react`, combine into `@pezkuwi/dev`
 - Move all user-facing (non-CI scripts) to JS, which makes cross-platform easier
-- Add `polkadot-dev-circular` script to extract circular deps
+- Add `pezkuwi-dev-circular` script to extract circular deps
 
 
 ## 0.34.1

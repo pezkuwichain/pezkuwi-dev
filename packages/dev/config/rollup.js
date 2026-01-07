@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import pluginAlias from '@rollup/plugin-alias';
@@ -20,7 +20,7 @@ import pluginCleanup from 'rollup-plugin-cleanup';
  * @returns {string}
  */
 function sanitizePkg (pkg) {
-  return pkg.replace('@polkadot/', '');
+  return pkg.replace('@pezkuwi/', '');
 }
 
 /**
@@ -28,7 +28,7 @@ function sanitizePkg (pkg) {
  * @returns {string}
  */
 function createName (input) {
-  return `polkadot-${sanitizePkg(input)}`
+  return `pezkuwi-${sanitizePkg(input)}`
     .toLowerCase()
     .replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
 }
@@ -63,7 +63,7 @@ export function createOutput (pkg, external, globals) {
   const name = sanitizePkg(pkg);
 
   return {
-    file: `packages/${name}/build/bundle-polkadot-${name}.js`,
+    file: `packages/${name}/build/bundle-pezkuwi-${name}.js`,
     format: 'umd',
     generatedCode: {
       constBindings: true

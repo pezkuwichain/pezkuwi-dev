@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @polkadot/dev-ts authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { TsAlias } from './types.js';
@@ -66,7 +66,7 @@ function readConfigFile (currentPath = CWD_PATH, tsconfig = 'tsconfig.json', fro
 
         // base configs are overridden by later configs, order here matters
         // FIXME The paths would be relative to the baseUrl at that point... for
-        // now we don't care much since we define these 2 together in all @polkadot
+        // now we don't care much since we define these 2 together in all @pezkuwi
         // configs, but it certainly _may_ create and issue at some point (for others)
         paths = { ...extConfig.paths, ...paths };
         url = url || extConfig.url;

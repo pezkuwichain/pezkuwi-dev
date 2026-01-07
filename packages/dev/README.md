@@ -4,7 +4,7 @@ A collection of shared CI scripts and development environment (configuration, de
 
 # Scripts
 
-## polkadot-ci-ghact-build
+## pezkuwi-ci-ghact-build
 
 **Summary**:  
 This script automates the continuous integration (CI) process for building, testing, versioning, and publishing packages in the repository. It handles tasks like cleaning the workspace, running tests, updating versions, publishing to npm, GitHub repositories, and Deno, and generating changelogs.
@@ -17,10 +17,10 @@ This script automates the continuous integration (CI) process for building, test
 ### Usage
 
 ```bash
-yarn polkadot-ci-ghact-build [options]
+yarn pezkuwi-ci-ghact-build [options]
 ```
 
-## polkadot-ci-ghact-docs
+## pezkuwi-ci-ghact-docs
 
 **Summary**:  
 This script generates documentation for the repository and deploys it to GitHub Pages. It ensures the documentation is built and published with the correct configuration.
@@ -32,10 +32,10 @@ This script does not accept any CLI arguments.
 ### Usage
 
 ```bash
-yarn polkadot-ci-ghact-docs
+yarn pezkuwi-ci-ghact-docs
 ```
 
-## polkadot-ci-ghpages-force
+## pezkuwi-ci-ghpages-force
 
 **Summary**:  
 This script force-refreshes the `gh-pages` branch of the repository by creating a new orphan branch, resetting its contents, and pushing it to GitHub. It ensures a clean state for GitHub Pages deployment.
@@ -47,10 +47,10 @@ This script does not accept any CLI arguments.
 ### Usage
 
 ```bash
-yarn polkadot-ci-ghpages-force
+yarn pezkuwi-ci-ghpages-force
 ```
 
-## polkadot-dev-build-docs
+## pezkuwi-dev-build-docs
 
 **Summary**:  
 This script prepares the documentation for building by copying the `docs` directory to a `build-docs` directory. If the `build-docs` directory already exists, it is cleared before copying.
@@ -62,10 +62,10 @@ This script does not accept any CLI arguments.
 ### Usage
 
 ```bash
-yarn polkadot-dev-build-docs
+yarn pezkuwi-dev-build-docs
 ```
 
-## polkadot-dev-build-ts
+## pezkuwi-dev-build-ts
 
 **Summary**:  
 This script compiles TypeScript source files into JavaScript outputs using the specified compiler (`tsc`), prepares the build artifacts, rewrites imports for compatibility (e.g., for Deno), lints dependencies, and updates package metadata for distribution. It supports CommonJS, ESM, and Deno outputs, along with configuration validation and export mapping.
@@ -79,10 +79,10 @@ This script compiles TypeScript source files into JavaScript outputs using the s
 ### Usage
 
 ```bash
-yarn polkadot-dev-build-ts [options]
+yarn pezkuwi-dev-build-ts [options]
 ```
 
-## polkadot-dev-circular
+## pezkuwi-dev-circular
 
 **Summary**:  
 This script checks the project for circular dependencies in TypeScript (`.ts`, `.tsx`) files using the `madge` library. It reports any detected circular dependencies and exits with an error if any are found.
@@ -92,10 +92,10 @@ This script checks the project for circular dependencies in TypeScript (`.ts`, `
 This script does not accept any CLI arguments.
 
 ```bash
-yarn polkadot-dev-circular
+yarn pezkuwi-dev-circular
 ```
 
-## polkadot-dev-clean-build
+## pezkuwi-dev-clean-build
 
 **Summary**:  
 This script removes build artifacts and temporary files from the repository. It targets directories like `build` and files such as `tsconfig.*.tsbuildinfo`, ensuring a clean workspace for fresh builds.
@@ -105,10 +105,10 @@ This script removes build artifacts and temporary files from the repository. It 
 This script does not accept any CLI arguments.
 
 ```bash
-yarn polkadot-dev-clean-build
+yarn pezkuwi-dev-clean-build
 ```
 
-## polkadot-dev-contrib
+## pezkuwi-dev-contrib
 
 **Summary**:  
 This script generates a `CONTRIBUTORS` file by aggregating and listing all contributors to the repository based on the Git commit history. It excludes bot accounts and service-related commits (e.g., GitHub Actions, Travis CI). The output includes the number of contributions, contributor names, and their most recent commit hash.
@@ -118,10 +118,10 @@ This script generates a `CONTRIBUTORS` file by aggregating and listing all contr
 This script does not accept any CLI arguments.
 
 ```bash
-yarn polkadot-dev-contrib
+yarn pezkuwi-dev-contrib
 ```
 
-## polkadot-dev-copy-dir
+## pezkuwi-dev-copy-dir
 
 **Summary**:  
 This script copies directories from specified source paths to a destination path. It supports options to change the working directory and to flatten the directory structure during copying.
@@ -137,12 +137,12 @@ This script copies directories from specified source paths to a destination path
 ### Usage
 
 ```bash
-yarn polkadot-dev-copy-dir [options] <source>... <destination>
+yarn pezkuwi-dev-copy-dir [options] <source>... <destination>
 ```
 - `<source>`: One or more source directories to copy.
 - `<destination>`: Destination directory for the copied files.
 
-## polkadot-dev-copy-to
+## pezkuwi-dev-copy-to
 
 **Summary**:  
 This script copies the `build` output and `node_modules` of all packages in the repository to a specified destination directory. It ensures the destination `node_modules` folder exists and is up-to-date.
@@ -155,10 +155,10 @@ This script copies the `build` output and `node_modules` of all packages in the 
 ### Usage
 
 ```bash
-yarn polkadot-dev-copy-to <destination>
+yarn pezkuwi-dev-copy-to <destination>
 ```
 
-## polkadot-dev-deno-map
+## pezkuwi-dev-deno-map
 
 **Summary**:  
 This script generates a `mod.ts` file and an `import_map.json` file for Deno compatibility. It exports all packages with a `mod.ts` file in their `src` directory and maps their paths for use in Deno.
@@ -175,7 +175,7 @@ This script generates a `mod.ts` file and an `import_map.json` file for Deno com
 
 This script does not accept any CLI arguments.
 
-## polkadot-dev-run-lint
+## pezkuwi-dev-run-lint
 
 **Summary**:  
 This script runs linting and TypeScript checks on the repository. It uses `eslint` for code linting and `tsc` for TypeScript type checking. Specific checks can be skipped using CLI arguments.
@@ -191,10 +191,10 @@ This script runs linting and TypeScript checks on the repository. It uses `eslin
 ### Usage
 
 ```bash
-yarn polkadot-dev-run-lint [options]
+yarn pezkuwi-dev-run-lint [options]
 ```
 
-## polkadot-dev-run-node-ts
+## pezkuwi-dev-run-node-ts
 
 **Summary**:  
 This script executes a Node.js script with TypeScript support, using the `@pezkuwi/dev-ts/cached` loader by default. It dynamically handles global and local loaders and allows for additional Node.js flags to be passed.
@@ -217,7 +217,7 @@ This script executes a Node.js script with TypeScript support, using the `@pezku
 ### Usage
 
 ```bash
-yarn polkadot-dev-run-node-ts <script> [nodeFlags...] [args...]
+yarn pezkuwi-dev-run-node-ts <script> [nodeFlags...] [args...]
 ```
 
 Notes:
@@ -228,7 +228,7 @@ Notes:
 3. Local loaders are appended.
 - Global and local loaders can be mixed for flexible runtime configurations.
 
-## polkadot-dev-run-test
+## pezkuwi-dev-run-test
 
 **Summary**:  
 This script runs test files in the repository, filtering by file extensions and optional path-based filters. It supports both Node.js and browser environments, custom flags, and development-specific configurations.
@@ -275,7 +275,7 @@ The script searches for test files with the following extensions:
 ### Usage
 
 ```bash
-yarn polkadot-dev-run-test [options] [filters...]
+yarn pezkuwi-dev-run-test [options] [filters...]
 ```
 
 ### Behavior
@@ -292,7 +292,7 @@ If no matching files are found, the script exits with a fatal error.
 - **Development Mode:**
 In development mode, local build paths are used for test and TypeScript loaders.
 
-## polkadot-dev-version
+## pezkuwi-dev-version
 
 **Summary**:  
 This script automates the version bump process for a package or a monorepo. It updates the `version` field in `package.json` files and synchronizes dependency versions across workspaces. It supports major, minor, patch, and pre-release version bumps.
@@ -323,10 +323,10 @@ This script automates the version bump process for a package or a monorepo. It u
 ### Usage
 
 ```bash
-yarn polkadot-dev-version <type>
+yarn pezkuwi-dev-version <type>
 ```
 
-## polkadot-dev-yarn-only
+## pezkuwi-dev-yarn-only
 
 
 **Summary**:  
@@ -343,10 +343,10 @@ This script ensures that `yarn` is being used as the package manager. It exits w
 ### Usage
 
 ```bash
-yarn polkadot-dev-yarn-only
+yarn pezkuwi-dev-yarn-only
 ```
 
-## polkadot-exec-eslint
+## pezkuwi-exec-eslint
 
 **Summary**:  
 This script runs the ESLint binary to lint JavaScript and TypeScript files in the project. It uses the ESLint installation local to the project.
@@ -362,14 +362,14 @@ This script runs the ESLint binary to lint JavaScript and TypeScript files in th
 ### Usage
 
 ```bash
-yarn polkadot-exec-eslint [eslint-arguments]
+yarn pezkuwi-exec-eslint [eslint-arguments]
 ```
 
 Notes
 - This script ensures that the locally installed version of ESLint is used, avoiding conflicts with global installations.
 - All standard ESLint CLI options can be passed directly to the script.
 
-## polkadot-exec-ghpages
+## pezkuwi-exec-ghpages
 
 **Summary**:  
 This script acts as a wrapper for the `gh-pages` tool, which is used to publish content to a project's GitHub Pages branch.
@@ -388,10 +388,10 @@ This script acts as a wrapper for the `gh-pages` tool, which is used to publish 
 ### Usage
 
 ```bash
-yarn polkadot-exec-ghpages [gh-pages-arguments]
+yarn pezkuwi-exec-ghpages [gh-pages-arguments]
 ```
 
-## polkadot-exec-ghrelease
+## pezkuwi-exec-ghrelease
 
 **Summary**:  
 This script is a wrapper for the `gh-release` tool, used to create GitHub releases directly from the command line.
@@ -407,10 +407,10 @@ This script is a wrapper for the `gh-release` tool, used to create GitHub releas
 ### Usage
 
 ```bash
-yarn polkadot-exec-ghrelease [gh-release-arguments]
+yarn pezkuwi-exec-ghrelease [gh-release-arguments]
 ```
 
-## polkadot-exec-node-test
+## pezkuwi-exec-node-test
 
 **Summary**:  
 This script is designed to execute Node.js tests using the `node:test` module. It includes support for diagnostic reporting, customizable logging, and execution controls like bail and timeout.
@@ -453,10 +453,10 @@ This script is designed to execute Node.js tests using the `node:test` module. I
 ### Usage:
 
 ```bash
-yarn polkadot-exec-node-test [options] <files...>
+yarn pezkuwi-exec-node-test [options] <files...>
 ```
 
-## polkadot-exec-rollup
+## pezkuwi-exec-rollup
 
 **Summary**:  
 This script serves as a wrapper for the Rollup CLI, allowing users to execute Rollup commands via Node.js. It simplifies access to the Rollup binary and forwards all provided arguments directly to the Rollup CLI.
@@ -483,10 +483,10 @@ Refer to the [Rollup CLI documentation](https://rollupjs.org/guide/en/#command-l
 ### Usage
 
 ```bash
-yarn polkadot-exec-rollup [options]
+yarn pezkuwi-exec-rollup [options]
 ```
 
-## polkadot-exec-tsc
+## pezkuwi-exec-tsc
 
 **Summary**:  
 This script executes the TypeScript Compiler (TSC) directly by importing the TypeScript library, enabling developers to compile TypeScript files with the same options available in the native `tsc` CLI.
@@ -513,7 +513,7 @@ Refer to the official [TypeScript Compiler Options](https://www.typescriptlang.o
 ### CLI Usage  
 
 ```bash
-yarn polkadot-exec-tsc [options]
+yarn pezkuwi-exec-tsc [options]
 ```
 
 ##
@@ -543,5 +543,5 @@ Refer to the official [Webpack CLI Options](https://webpack.js.org/api/cli/) for
 ## CLI Usage  
 
 ```bash
-yarn polkadot-exec-webpack [options]
+yarn pezkuwi-exec-webpack [options]
 ```

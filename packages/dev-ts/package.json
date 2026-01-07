@@ -1,21 +1,21 @@
 {
   "author": "Jaco Greeff <jacogr@gmail.com>",
-  "bugs": "https://github.com/pezkuwi/dev/issues",
+  "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
   "description": "An TS -> ESM loader for Node >= 16.12",
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/pezkuwi/dev/tree/master/packages/dev-ts#readme",
+  "homepage": "https://github.com/pezkuwichain/pezkuwi-dev/tree/master/packages/dev-ts#readme",
   "license": "Apache-2.0",
   "name": "@pezkuwi/dev-ts",
   "repository": {
     "directory": "packages/dev-ts",
     "type": "git",
-    "url": "https://github.com/pezkuwi/dev.git"
+    "url": "https://github.com/pezkuwichain/pezkuwi-dev.git"
   },
   "sideEffects": false,
   "type": "module",
-  "version": "0.84.3",
+  "version": "0.85.0",
   "main": "./cjs/index.js",
   "exports": {
     "./cjs/package.json": "./cjs/package.json",

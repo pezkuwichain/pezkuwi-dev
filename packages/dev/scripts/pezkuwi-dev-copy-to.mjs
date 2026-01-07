@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @polkadot/dev authors & contributors
+// Copyright 2017-2025 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import fs from 'node:fs';
@@ -9,7 +9,7 @@ import { copyDirSync, execPm, exitFatal, logBin, mkdirpSync, rimrafSync } from '
 
 const args = process.argv.slice(2);
 
-logBin('polkadot-dev-copy-to');
+logBin('pezkuwi-dev-copy-to');
 
 if (args.length !== 1) {
   exitFatal('Expected one <destination> argument');

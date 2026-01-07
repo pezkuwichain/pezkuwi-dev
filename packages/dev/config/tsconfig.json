@@ -6,7 +6,7 @@
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     /**
-     * Aligns with packages/dev/scripts/polkadot-dev-build-ts & packages/dev-ts/src/loader
+     * Aligns with packages/dev/scripts/pezkuwi-dev-build-ts & packages/dev-ts/src/loader
      * (target here is specifically tied to the minimum supported Node version)
      */
     "module": "nodenext",
@@ -14,7 +14,7 @@
     "target": "es2022",
 
     /**
-     * Specific compilation configs for polkadot-js projects as it is used
+     * Specific compilation configs for pezkuwi-js projects as it is used
      * (we only compile *.d.ts via the tsc command-line)
      */
     "declaration": true,
