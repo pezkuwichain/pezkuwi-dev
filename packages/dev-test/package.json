@@ -1,5 +1,5 @@
 {
-  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "author": "Pezkuwi Team <team@pezkuwichain.app>",
   "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
   "description": "A basic test-functions-as-global library on top of node:test",
   "engines": {
@@ -15,16 +15,206 @@
   },
   "sideEffects": false,
   "type": "module",
-  "version": "0.85.3",
-  "main": "./index.js",
+  "types": "./index.d.ts",
+  "version": "0.85.4",
+  "main": "./cjs/index.js",
+  "module": "./index.js",
   "exports": {
-    "./globals.d.ts": "./src/globals.d.ts"
+    ".": {
+      "module": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "default": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    },
+    "./browser": {
+      "module": {
+        "types": "./browser.d.ts",
+        "default": "./browser.js"
+      },
+      "require": {
+        "types": "./cjs/browser.d.ts",
+        "default": "./cjs/browser.js"
+      },
+      "default": {
+        "types": "./browser.d.ts",
+        "default": "./browser.js"
+      }
+    },
+    "./cjs/*": "./cjs/*.js",
+    "./cjs/package.json": "./cjs/package.json",
+    "./env": {
+      "module": {
+        "types": "./env/index.d.ts",
+        "default": "./env/index.js"
+      },
+      "require": {
+        "types": "./cjs/env/index.d.ts",
+        "default": "./cjs/env/index.js"
+      },
+      "default": {
+        "types": "./env/index.d.ts",
+        "default": "./env/index.js"
+      }
+    },
+    "./env/browser": {
+      "module": {
+        "types": "./env/browser.d.ts",
+        "default": "./env/browser.js"
+      },
+      "require": {
+        "types": "./cjs/env/browser.d.ts",
+        "default": "./cjs/env/browser.js"
+      },
+      "default": {
+        "types": "./env/browser.d.ts",
+        "default": "./env/browser.js"
+      }
+    },
+    "./env/expect": {
+      "module": {
+        "types": "./env/expect.d.ts",
+        "default": "./env/expect.js"
+      },
+      "require": {
+        "types": "./cjs/env/expect.d.ts",
+        "default": "./cjs/env/expect.js"
+      },
+      "default": {
+        "types": "./env/expect.d.ts",
+        "default": "./env/expect.js"
+      }
+    },
+    "./env/jest": {
+      "module": {
+        "types": "./env/jest.d.ts",
+        "default": "./env/jest.js"
+      },
+      "require": {
+        "types": "./cjs/env/jest.d.ts",
+        "default": "./cjs/env/jest.js"
+      },
+      "default": {
+        "types": "./env/jest.d.ts",
+        "default": "./env/jest.js"
+      }
+    },
+    "./env/lifecycle": {
+      "module": {
+        "types": "./env/lifecycle.d.ts",
+        "default": "./env/lifecycle.js"
+      },
+      "require": {
+        "types": "./cjs/env/lifecycle.d.ts",
+        "default": "./cjs/env/lifecycle.js"
+      },
+      "default": {
+        "types": "./env/lifecycle.d.ts",
+        "default": "./env/lifecycle.js"
+      }
+    },
+    "./env/suite": {
+      "module": {
+        "types": "./env/suite.d.ts",
+        "default": "./env/suite.js"
+      },
+      "require": {
+        "types": "./cjs/env/suite.d.ts",
+        "default": "./cjs/env/suite.js"
+      },
+      "default": {
+        "types": "./env/suite.d.ts",
+        "default": "./env/suite.js"
+      }
+    },
+    "./globals": "./globals.cjs",
+    "./globals.cjs": "./globals.cjs",
+    "./globals.d.cts": "./globals.d.cts",
+    "./globals.d.ts": "./globals.d.ts",
+    "./node": {
+      "module": {
+        "types": "./node.d.ts",
+        "default": "./node.js"
+      },
+      "require": {
+        "types": "./cjs/node.d.ts",
+        "default": "./cjs/node.js"
+      },
+      "default": {
+        "types": "./node.d.ts",
+        "default": "./node.js"
+      }
+    },
+    "./package.json": {
+      "require": "./cjs/package.json",
+      "default": "./package.json"
+    },
+    "./packageInfo": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./packageInfo.js": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./types": {
+      "module": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      },
+      "require": {
+        "types": "./cjs/types.d.ts",
+        "default": "./cjs/types.js"
+      },
+      "default": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      }
+    },
+    "./util": {
+      "module": {
+        "types": "./util.d.ts",
+        "default": "./util.js"
+      },
+      "require": {
+        "types": "./cjs/util.d.ts",
+        "default": "./cjs/util.js"
+      },
+      "default": {
+        "types": "./util.d.ts",
+        "default": "./util.js"
+      }
+    }
   },
   "dependencies": {
     "jsdom": "^24.0.0",
     "tslib": "^2.7.0"
-  },
-  "devDependencies": {
-    "@types/jsdom": "^21.1.6"
   }
 }

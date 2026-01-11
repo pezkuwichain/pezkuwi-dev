@@ -21,3 +21,14 @@ tmp/
 tsconfig.*buildinfo
 yarn-debug.log*
 yarn-error.log*
+
+# TypeScript build outputs
+packages/*/*.d.ts
+packages/*/*.js
+packages/*/*.mjs
+packages/*/*.cjs
+packages/*/cjs/
+packages/*/env/
+packages/*/rootJs/
+packages/*/rootStatic/
+packages/*/LICENSE

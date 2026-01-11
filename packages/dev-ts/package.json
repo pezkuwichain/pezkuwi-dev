@@ -1,5 +1,5 @@
 {
-  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "author": "Pezkuwi Team <team@pezkuwichain.app>",
   "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
   "description": "An TS -> ESM loader for Node >= 16.12",
   "engines": {
@@ -15,11 +15,11 @@
   },
   "sideEffects": false,
   "type": "module",
-  "version": "0.85.3",
-  "main": "./cjs/index.js",
+  "types": "./cjs/index.d.ts",
+  "version": "0.85.4",
+  "main": "./cjs/cjs/index.js",
+  "module": "./cjs/index.js",
   "exports": {
-    "./cjs/package.json": "./cjs/package.json",
-    "./cjs/*": "./cjs/*.js",
     ".": {
       "module": {
         "types": "./index.d.ts",
@@ -48,6 +48,8 @@
         "default": "./cached.js"
       }
     },
+    "./cjs/*": "./cjs/*.js",
+    "./cjs/package.json": "./cjs/package.json",
     "./common": {
       "module": {
         "types": "./common.d.ts",
@@ -80,7 +82,7 @@
       "require": "./cjs/package.json",
       "default": "./package.json"
     },
-    "./packageInfo.js": {
+    "./packageInfo": {
       "module": {
         "types": "./packageInfo.d.ts",
         "default": "./packageInfo.js"
@@ -94,7 +96,7 @@
         "default": "./packageInfo.js"
       }
     },
-    "./packageInfo": {
+    "./packageInfo.js": {
       "module": {
         "types": "./packageInfo.d.ts",
         "default": "./packageInfo.js"

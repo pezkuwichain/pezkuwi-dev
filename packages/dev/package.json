@@ -1,5 +1,5 @@
 {
-  "author": "Jaco Greeff <jacogr@gmail.com>",
+  "author": "Pezkuwi Team <team@pezkuwichain.app>",
   "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
   "description": "A collection of shared CI scripts and development environment used by @pezkuwi projects",
   "engines": {
@@ -15,7 +15,10 @@
   },
   "sideEffects": false,
   "type": "module",
-  "version": "0.85.3",
+  "types": "./index.d.ts",
+  "version": "0.85.4",
+  "main": "./cjs/index.js",
+  "module": "./index.js",
   "bin": {
     "pezkuwi-ci-ghact-build": "./scripts/pezkuwi-ci-ghact-build.mjs",
     "pezkuwi-ci-ghact-docs": "./scripts/pezkuwi-ci-ghact-docs.mjs",
@@ -42,11 +45,241 @@
     "pezkuwi-exec-webpack": "./scripts/pezkuwi-exec-webpack.mjs"
   },
   "exports": {
+    ".": {
+      "module": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      },
+      "default": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    },
+    "./cjs/*": "./cjs/*.js",
+    "./cjs/package.json": "./cjs/package.json",
     "./config/eslint": "./config/eslint.js",
+    "./config/eslint.rules": "./config/eslint.rules.js",
+    "./config/prettier": "./config/prettier.cjs",
     "./config/prettier.cjs": "./config/prettier.cjs",
+    "./config/rollup": "./config/rollup.js",
     "./config/tsconfig.json": "./config/tsconfig.json",
-    "./rootJs/dynamic.mjs": "./src/rootJs/dynamic.mjs",
-    "./rootJs/testJson.json": "./src/rootJs/testJson.json"
+    "./config/typedoc": "./config/typedoc.cjs",
+    "./config/typedoc.cjs": "./config/typedoc.cjs",
+    "./detectOther": {
+      "module": {
+        "types": "./detectOther.d.ts",
+        "default": "./detectOther.js"
+      },
+      "require": {
+        "types": "./cjs/detectOther.d.ts",
+        "default": "./cjs/detectOther.js"
+      },
+      "default": {
+        "types": "./detectOther.d.ts",
+        "default": "./detectOther.js"
+      }
+    },
+    "./package.json": {
+      "require": "./cjs/package.json",
+      "default": "./package.json"
+    },
+    "./packageInfo": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./packageInfo.js": {
+      "module": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      },
+      "require": {
+        "types": "./cjs/packageInfo.d.ts",
+        "default": "./cjs/packageInfo.js"
+      },
+      "default": {
+        "types": "./packageInfo.d.ts",
+        "default": "./packageInfo.js"
+      }
+    },
+    "./root": {
+      "module": {
+        "types": "./root.d.ts",
+        "default": "./root.js"
+      },
+      "require": {
+        "types": "./cjs/root.d.ts",
+        "default": "./cjs/root.js"
+      },
+      "default": {
+        "types": "./root.d.ts",
+        "default": "./root.js"
+      }
+    },
+    "./rootJs": {
+      "module": {
+        "types": "./rootJs/index.d.ts",
+        "default": "./rootJs/index.js"
+      },
+      "require": {
+        "types": "./cjs/rootJs/index.d.ts",
+        "default": "./cjs/rootJs/index.js"
+      },
+      "default": {
+        "types": "./rootJs/index.d.ts",
+        "default": "./rootJs/index.js"
+      }
+    },
+    "./rootJs/augmented": {
+      "module": {
+        "types": "./rootJs/augmented.d.ts",
+        "default": "./rootJs/augmented.js"
+      },
+      "require": {
+        "types": "./cjs/rootJs/augmented.d.ts",
+        "default": "./cjs/rootJs/augmented.js"
+      },
+      "default": {
+        "types": "./rootJs/augmented.d.ts",
+        "default": "./rootJs/augmented.js"
+      }
+    },
+    "./rootJs/Clazz": {
+      "module": {
+        "types": "./rootJs/Clazz.d.ts",
+        "default": "./rootJs/Clazz.js"
+      },
+      "require": {
+        "types": "./cjs/rootJs/Clazz.d.ts",
+        "default": "./cjs/rootJs/Clazz.js"
+      },
+      "default": {
+        "types": "./rootJs/Clazz.d.ts",
+        "default": "./rootJs/Clazz.js"
+      }
+    },
+    "./rootJs/dynamic": "./rootJs/dynamic.mjs",
+    "./rootJs/dynamic.d.mts": "./rootJs/dynamic.d.mts",
+    "./rootJs/dynamic.mjs": "./rootJs/dynamic.mjs",
+    "./rootJs/Jsx": {
+      "module": {
+        "types": "./rootJs/Jsx.d.ts",
+        "default": "./rootJs/Jsx.js"
+      },
+      "require": {
+        "types": "./cjs/rootJs/Jsx.d.ts",
+        "default": "./cjs/rootJs/Jsx.js"
+      },
+      "default": {
+        "types": "./rootJs/Jsx.d.ts",
+        "default": "./rootJs/Jsx.js"
+      }
+    },
+    "./rootJs/JsxChild": {
+      "module": {
+        "types": "./rootJs/JsxChild.d.ts",
+        "default": "./rootJs/JsxChild.js"
+      },
+      "require": {
+        "types": "./cjs/rootJs/JsxChild.d.ts",
+        "default": "./cjs/rootJs/JsxChild.js"
+      },
+      "default": {
+        "types": "./rootJs/JsxChild.d.ts",
+        "default": "./rootJs/JsxChild.js"
+      }
+    },
+    "./rootJs/testJson.json": "./rootJs/testJson.json",
+    "./rootStatic/zagros.svg": "./rootStatic/zagros.svg",
+    "./rootTests": {
+      "module": {
+        "types": "./rootTests.d.ts",
+        "default": "./rootTests.js"
+      },
+      "require": {
+        "types": "./cjs/rootTests.d.ts",
+        "default": "./cjs/rootTests.js"
+      },
+      "default": {
+        "types": "./rootTests.d.ts",
+        "default": "./rootTests.js"
+      }
+    },
+    "./scripts/pezkuwi-ci-ghact-build": "./scripts/pezkuwi-ci-ghact-build.mjs",
+    "./scripts/pezkuwi-ci-ghact-build.mjs": "./scripts/pezkuwi-ci-ghact-build.mjs",
+    "./scripts/pezkuwi-ci-ghact-docs": "./scripts/pezkuwi-ci-ghact-docs.mjs",
+    "./scripts/pezkuwi-ci-ghact-docs.mjs": "./scripts/pezkuwi-ci-ghact-docs.mjs",
+    "./scripts/pezkuwi-ci-ghpages-force": "./scripts/pezkuwi-ci-ghpages-force.mjs",
+    "./scripts/pezkuwi-ci-ghpages-force.mjs": "./scripts/pezkuwi-ci-ghpages-force.mjs",
+    "./scripts/pezkuwi-dev-build-docs": "./scripts/pezkuwi-dev-build-docs.mjs",
+    "./scripts/pezkuwi-dev-build-docs.mjs": "./scripts/pezkuwi-dev-build-docs.mjs",
+    "./scripts/pezkuwi-dev-build-ts": "./scripts/pezkuwi-dev-build-ts.mjs",
+    "./scripts/pezkuwi-dev-build-ts.mjs": "./scripts/pezkuwi-dev-build-ts.mjs",
+    "./scripts/pezkuwi-dev-circular": "./scripts/pezkuwi-dev-circular.mjs",
+    "./scripts/pezkuwi-dev-circular.mjs": "./scripts/pezkuwi-dev-circular.mjs",
+    "./scripts/pezkuwi-dev-clean-build": "./scripts/pezkuwi-dev-clean-build.mjs",
+    "./scripts/pezkuwi-dev-clean-build.mjs": "./scripts/pezkuwi-dev-clean-build.mjs",
+    "./scripts/pezkuwi-dev-contrib": "./scripts/pezkuwi-dev-contrib.mjs",
+    "./scripts/pezkuwi-dev-contrib.mjs": "./scripts/pezkuwi-dev-contrib.mjs",
+    "./scripts/pezkuwi-dev-copy-dir": "./scripts/pezkuwi-dev-copy-dir.mjs",
+    "./scripts/pezkuwi-dev-copy-dir.mjs": "./scripts/pezkuwi-dev-copy-dir.mjs",
+    "./scripts/pezkuwi-dev-copy-to": "./scripts/pezkuwi-dev-copy-to.mjs",
+    "./scripts/pezkuwi-dev-copy-to.mjs": "./scripts/pezkuwi-dev-copy-to.mjs",
+    "./scripts/pezkuwi-dev-deno-map": "./scripts/pezkuwi-dev-deno-map.mjs",
+    "./scripts/pezkuwi-dev-deno-map.mjs": "./scripts/pezkuwi-dev-deno-map.mjs",
+    "./scripts/pezkuwi-dev-run-lint": "./scripts/pezkuwi-dev-run-lint.mjs",
+    "./scripts/pezkuwi-dev-run-lint.mjs": "./scripts/pezkuwi-dev-run-lint.mjs",
+    "./scripts/pezkuwi-dev-run-node-ts": "./scripts/pezkuwi-dev-run-node-ts.mjs",
+    "./scripts/pezkuwi-dev-run-node-ts.mjs": "./scripts/pezkuwi-dev-run-node-ts.mjs",
+    "./scripts/pezkuwi-dev-run-test": "./scripts/pezkuwi-dev-run-test.mjs",
+    "./scripts/pezkuwi-dev-run-test.mjs": "./scripts/pezkuwi-dev-run-test.mjs",
+    "./scripts/pezkuwi-dev-version": "./scripts/pezkuwi-dev-version.mjs",
+    "./scripts/pezkuwi-dev-version.mjs": "./scripts/pezkuwi-dev-version.mjs",
+    "./scripts/pezkuwi-dev-yarn-only": "./scripts/pezkuwi-dev-yarn-only.mjs",
+    "./scripts/pezkuwi-dev-yarn-only.mjs": "./scripts/pezkuwi-dev-yarn-only.mjs",
+    "./scripts/pezkuwi-exec-eslint": "./scripts/pezkuwi-exec-eslint.mjs",
+    "./scripts/pezkuwi-exec-eslint.mjs": "./scripts/pezkuwi-exec-eslint.mjs",
+    "./scripts/pezkuwi-exec-ghpages": "./scripts/pezkuwi-exec-ghpages.mjs",
+    "./scripts/pezkuwi-exec-ghpages.mjs": "./scripts/pezkuwi-exec-ghpages.mjs",
+    "./scripts/pezkuwi-exec-ghrelease": "./scripts/pezkuwi-exec-ghrelease.mjs",
+    "./scripts/pezkuwi-exec-ghrelease.mjs": "./scripts/pezkuwi-exec-ghrelease.mjs",
+    "./scripts/pezkuwi-exec-node-test": "./scripts/pezkuwi-exec-node-test.mjs",
+    "./scripts/pezkuwi-exec-node-test.mjs": "./scripts/pezkuwi-exec-node-test.mjs",
+    "./scripts/pezkuwi-exec-rollup": "./scripts/pezkuwi-exec-rollup.mjs",
+    "./scripts/pezkuwi-exec-rollup.mjs": "./scripts/pezkuwi-exec-rollup.mjs",
+    "./scripts/pezkuwi-exec-tsc": "./scripts/pezkuwi-exec-tsc.mjs",
+    "./scripts/pezkuwi-exec-tsc.mjs": "./scripts/pezkuwi-exec-tsc.mjs",
+    "./scripts/pezkuwi-exec-webpack": "./scripts/pezkuwi-exec-webpack.mjs",
+    "./scripts/pezkuwi-exec-webpack.mjs": "./scripts/pezkuwi-exec-webpack.mjs",
+    "./scripts/util": "./scripts/util.mjs",
+    "./scripts/util.mjs": "./scripts/util.mjs",
+    "./types": {
+      "module": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      },
+      "require": {
+        "types": "./cjs/types.d.ts",
+        "default": "./cjs/types.js"
+      },
+      "default": {
+        "types": "./types.d.ts",
+        "default": "./types.js"
+      }
+    }
   },
   "dependencies": {
     "@eslint/js": "^8.56.0",
@@ -92,16 +325,5 @@
     "webpack-merge": "^5.10.0",
     "webpack-subresource-integrity": "^5.2.0-rc.1",
     "yargs": "^17.7.2"
-  },
-  "devDependencies": {
-    "@testing-library/react": "^14.1.2",
-    "@types/node": "^20.11.5",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "@types/yargs": "^17.0.32",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-is": "^18.2.0",
-    "styled-components": "^6.1.8"
   }
 }

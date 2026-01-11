@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @pezkuwi/dev authors & contributors
+// Copyright 2017-2026 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // @ts-expect-error No definition for this one
@@ -54,7 +54,19 @@ export default [
       '**/.yarn/',
       '**/build/',
       '**/build-*/',
-      '**/coverage/'
+      '**/coverage/',
+      '**/cjs/**',
+      // Build output files (generated from src/)
+      'packages/*/*.d.ts',
+      'packages/*/*.js',
+      'packages/*/*.mjs',
+      'packages/*/*.cjs',
+      'packages/*/rootJs/**',
+      'packages/*/rootTests.*',
+      'packages/*/browser.*',
+      'packages/*/node.*',
+      'packages/*/types.*',
+      'packages/*/env/**'
     ]
   },
   {

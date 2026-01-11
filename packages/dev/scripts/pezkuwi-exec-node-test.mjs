@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Copyright 2017-2025 @pezkuwi/dev authors & contributors
+// Copyright 2017-2026 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // For Node 18, earliest usable is 18.14:

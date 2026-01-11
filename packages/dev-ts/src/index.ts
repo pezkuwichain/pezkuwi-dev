@@ -1,4 +1,4 @@
-// Copyright 2017-2025 @pezkuwi/dev-ts authors & contributors
+// Copyright 2017-2026 @pezkuwi/dev-ts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 // Adapted from: https://nodejs.org/api/esm.html#esm_transpiler_loader

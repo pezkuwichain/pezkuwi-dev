@@ -433,7 +433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pezkuwi/dev-test@npm:^0.84.2, @pezkuwi/dev-test@workspace:packages/dev-test":
+"@pezkuwi/dev-test@npm:^0.85.3, @pezkuwi/dev-test@workspace:packages/dev-test":
   version: 0.0.0-use.local
   resolution: "@pezkuwi/dev-test@workspace:packages/dev-test"
   dependencies:
@@ -443,7 +443,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pezkuwi/dev-ts@npm:^0.84.2, @pezkuwi/dev-ts@workspace:packages/dev-ts":
+"@pezkuwi/dev-ts@npm:^0.85.3, @pezkuwi/dev-ts@workspace:packages/dev-ts":
   version: 0.0.0-use.local
   resolution: "@pezkuwi/dev-ts@workspace:packages/dev-ts"
   dependencies:
@@ -458,8 +458,8 @@ __metadata:
   resolution: "@pezkuwi/dev@workspace:packages/dev"
   dependencies:
     "@eslint/js": "npm:^8.56.0"
-    "@pezkuwi/dev-test": "npm:^0.84.2"
-    "@pezkuwi/dev-ts": "npm:^0.84.2"
+    "@pezkuwi/dev-test": "npm:^0.85.3"
+    "@pezkuwi/dev-ts": "npm:^0.85.3"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^25.0.8"
     "@rollup/plugin-dynamic-import-vars": "npm:^2.1.5"
@@ -510,29 +510,29 @@ __metadata:
     webpack-subresource-integrity: "npm:^5.2.0-rc.1"
     yargs: "npm:^17.7.2"
   bin:
-    polkadot-ci-ghact-build: ./scripts/polkadot-ci-ghact-build.mjs
-    polkadot-ci-ghact-docs: ./scripts/polkadot-ci-ghact-docs.mjs
-    polkadot-ci-ghpages-force: ./scripts/polkadot-ci-ghpages-force.mjs
-    polkadot-dev-build-docs: ./scripts/polkadot-dev-build-docs.mjs
-    polkadot-dev-build-ts: ./scripts/polkadot-dev-build-ts.mjs
-    polkadot-dev-circular: ./scripts/polkadot-dev-circular.mjs
-    polkadot-dev-clean-build: ./scripts/polkadot-dev-clean-build.mjs
-    polkadot-dev-contrib: ./scripts/polkadot-dev-contrib.mjs
-    polkadot-dev-copy-dir: ./scripts/polkadot-dev-copy-dir.mjs
-    polkadot-dev-copy-to: ./scripts/polkadot-dev-copy-to.mjs
-    polkadot-dev-deno-map: ./scripts/polkadot-dev-deno-map.mjs
-    polkadot-dev-run-lint: ./scripts/polkadot-dev-run-lint.mjs
-    polkadot-dev-run-node-ts: ./scripts/polkadot-dev-run-node-ts.mjs
-    polkadot-dev-run-test: ./scripts/polkadot-dev-run-test.mjs
-    polkadot-dev-version: ./scripts/polkadot-dev-version.mjs
-    polkadot-dev-yarn-only: ./scripts/polkadot-dev-yarn-only.mjs
-    polkadot-exec-eslint: ./scripts/polkadot-exec-eslint.mjs
-    polkadot-exec-ghpages: ./scripts/polkadot-exec-ghpages.mjs
-    polkadot-exec-ghrelease: ./scripts/polkadot-exec-ghrelease.mjs
-    polkadot-exec-node-test: ./scripts/polkadot-exec-node-test.mjs
-    polkadot-exec-rollup: ./scripts/polkadot-exec-rollup.mjs
-    polkadot-exec-tsc: ./scripts/polkadot-exec-tsc.mjs
-    polkadot-exec-webpack: ./scripts/polkadot-exec-webpack.mjs
+    pezkuwi-ci-ghact-build: ./scripts/pezkuwi-ci-ghact-build.mjs
+    pezkuwi-ci-ghact-docs: ./scripts/pezkuwi-ci-ghact-docs.mjs
+    pezkuwi-ci-ghpages-force: ./scripts/pezkuwi-ci-ghpages-force.mjs
+    pezkuwi-dev-build-docs: ./scripts/pezkuwi-dev-build-docs.mjs
+    pezkuwi-dev-build-ts: ./scripts/pezkuwi-dev-build-ts.mjs
+    pezkuwi-dev-circular: ./scripts/pezkuwi-dev-circular.mjs
+    pezkuwi-dev-clean-build: ./scripts/pezkuwi-dev-clean-build.mjs
+    pezkuwi-dev-contrib: ./scripts/pezkuwi-dev-contrib.mjs
+    pezkuwi-dev-copy-dir: ./scripts/pezkuwi-dev-copy-dir.mjs
+    pezkuwi-dev-copy-to: ./scripts/pezkuwi-dev-copy-to.mjs
+    pezkuwi-dev-deno-map: ./scripts/pezkuwi-dev-deno-map.mjs
+    pezkuwi-dev-run-lint: ./scripts/pezkuwi-dev-run-lint.mjs
+    pezkuwi-dev-run-node-ts: ./scripts/pezkuwi-dev-run-node-ts.mjs
+    pezkuwi-dev-run-test: ./scripts/pezkuwi-dev-run-test.mjs
+    pezkuwi-dev-version: ./scripts/pezkuwi-dev-version.mjs
+    pezkuwi-dev-yarn-only: ./scripts/pezkuwi-dev-yarn-only.mjs
+    pezkuwi-exec-eslint: ./scripts/pezkuwi-exec-eslint.mjs
+    pezkuwi-exec-ghpages: ./scripts/pezkuwi-exec-ghpages.mjs
+    pezkuwi-exec-ghrelease: ./scripts/pezkuwi-exec-ghrelease.mjs
+    pezkuwi-exec-node-test: ./scripts/pezkuwi-exec-node-test.mjs
+    pezkuwi-exec-rollup: ./scripts/pezkuwi-exec-rollup.mjs
+    pezkuwi-exec-tsc: ./scripts/pezkuwi-exec-tsc.mjs
+    pezkuwi-exec-webpack: ./scripts/pezkuwi-exec-webpack.mjs
   languageName: unknown
   linkType: soft
 
