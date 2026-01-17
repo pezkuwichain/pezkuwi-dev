@@ -58,11 +58,11 @@ function extendMock <F extends AnyFn> (mocked: WithMock<F>) {
 export function jest () {
   return {
     jest: enhanceObj(enhanceObj({
-      fn: <F extends AnyFn> (fn?: F) => extendMock<F>(mock.fn(fn)),
+      fn: <F extends AnyFn> (fn?: F) => extendMock<F>(mock.fn(fn) as unknown as WithMock<F>),
       restoreAllMocks: () => {
         mock.reset();
       },
-      spyOn: <F extends AnyFn> (obj: object, key: string) => extendMock<F>(mock.method(obj, key as keyof typeof obj))
+      spyOn: <F extends AnyFn> (obj: object, key: string) => extendMock<F>(mock.method(obj, key as keyof typeof obj) as unknown as WithMock<F>)
     }, jestWarn), jestStub)
   };
 }

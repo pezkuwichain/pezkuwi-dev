@@ -13,6 +13,20 @@ interface WrapOpts {
 
 type WrapFn = (name: string, options: { only?: boolean; skip?: boolean; timeout?: number; todo?: boolean; }, fn: () => void | Promise<void>) => void | Promise<void>;
 
+type TestFn = (name: string, exec: () => void | Promise<void>, timeout?: number) => void;
+
+export interface Describe extends TestFn {
+  only: TestFn;
+  skip: TestFn;
+  todo: TestFn;
+}
+
+export interface It extends TestFn {
+  only: TestFn;
+  skip: TestFn;
+  todo: TestFn;
+}
+
 const MINUTE = 60 * 1000;
 
 /**
@@ -23,7 +37,7 @@ const MINUTE = 60 * 1000;
  *
  * @param {} fn
  */
-function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number) {
+function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number): Describe | It {
   const wrap = (opts: WrapOpts) => (name: string, exec: () => void | Promise<void>, timeout?: number) => fn(name, { ...opts, timeout: (timeout || defaultTimeout) }, exec) as unknown as void;
 
   // Ensure that we have consistent helpers on the function. These are not consistently
@@ -33,16 +47,16 @@ function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number) {
     only: wrap({ only: true }),
     skip: wrap({ skip: true }),
     todo: wrap({ todo: true })
-  });
+  }) as Describe | It;
 }
 
 /**
  * This ensures that the describe and it functions match our actual usages.
  * This includes .only, .skip and .todo helpers (.each is not applied)
  **/
-export function suite () {
+export function suite (): { describe: Describe; it: It } {
   return {
-    describe: createWrapper(describe, 60 * MINUTE),
-    it: createWrapper(it, 2 * MINUTE)
+    describe: createWrapper(describe, 60 * MINUTE) as Describe,
+    it: createWrapper(it, 2 * MINUTE) as It
   };
 }

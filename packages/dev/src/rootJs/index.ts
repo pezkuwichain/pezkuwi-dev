@@ -5,7 +5,7 @@
 import './augmented.js';
 
 /** This import should appear as-in in the ouput (cjs without asserts) */
-import testJson from '@pezkuwi/dev/rootJs/testJson.json' assert { type: 'json' };
+import testJson from '@pezkuwi/dev/rootJs/testJson.json' with { type: 'json' };
 
 /** Double double work, i.e. re-exports */
 export { Clazz } from './Clazz.js';

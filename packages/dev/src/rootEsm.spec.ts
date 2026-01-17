@@ -1,7 +1,11 @@
 // Copyright 2017-2026 @pezkuwi/dev authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-/// <reference types="@pezkuwi/dev-test/globals.d.ts" />
+import type { Describe, It } from '@pezkuwi/dev-test/env/suite.js';
+
+declare const describe: Describe;
+declare const it: It;
+declare const expect: (value: unknown) => { toBe: (expected: boolean) => void; toEqual: (expected: unknown) => void };
 
 import fs from 'node:fs';
 import path from 'node:path';

@@ -1,6 +1,12 @@
 // Copyright 2017-2026 @pezkuwi/dev-test authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import '../globals.d.ts';
+
+declare const describe: import('./suite.js').Describe;
+declare const it: import('./suite.js').It;
+declare const expect: (value: unknown) => { toBe: (expected: unknown) => void; toBeDefined: () => void };
+
 describe('describe()', () => {
   // eslint-disable-next-line jest/no-focused-tests
   describe.only('.only', () => {

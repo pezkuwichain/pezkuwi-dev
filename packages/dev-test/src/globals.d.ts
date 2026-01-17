@@ -6,15 +6,13 @@
 import type { expect } from './env/expect.js';
 import type { jest } from './env/jest.js';
 import type { lifecycle } from './env/lifecycle.js';
-import type { suite } from './env/suite.js';
+import type { Describe, It } from './env/suite.js';
 
 type Expect = ReturnType<typeof expect>;
 
 type Jest = ReturnType<typeof jest>;
 
 type Lifecycle = ReturnType<typeof lifecycle>;
-
-type Suite = ReturnType<typeof suite>;
 
 declare global {
   var after: Lifecycle['after'];
@@ -23,9 +21,9 @@ declare global {
   var before: Lifecycle['before'];
   var beforeAll: Lifecycle['beforeAll'];
   var beforeEach: Lifecycle['beforeEach'];
-  var describe: Suite['describe'];
+  var describe: Describe;
   var expect: Expect['expect'];
-  var it: Suite['it'];
+  var it: It;
   var jest: Jest['jest'];
 }
 
