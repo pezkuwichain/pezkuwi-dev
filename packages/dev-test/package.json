@@ -216,5 +216,13 @@
   "dependencies": {
     "jsdom": "^24.0.0",
     "tslib": "^2.7.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }

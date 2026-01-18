@@ -16,7 +16,7 @@
   "sideEffects": false,
   "type": "module",
   "types": "./index.d.ts",
-  "version": "0.85.4",
+  "version": "0.85.5",
   "main": "./cjs/index.js",
   "module": "./index.js",
   "bin": {

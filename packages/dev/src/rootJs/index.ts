@@ -5,7 +5,7 @@
 import './augmented.js';
 
 /** This import should appear as-in in the ouput (cjs without asserts) */
-import testJson from '@pezkuwi/dev/rootJs/testJson.json' with { type: 'json' };
+import testJson from './testJson.json' with { type: 'json' };
 
 /** Double double work, i.e. re-exports */
 export { Clazz } from './Clazz.js';
@@ -20,7 +20,7 @@ export function bigIntExp (): bigint {
 export async function dynamic (a: number, b: number): Promise<number> {
   // NOTE we go via this path so it points to the same location in both ESM
   // and CJS output (a './dynamic' import would be different otherwise)
-  const { sum } = await import('@pezkuwi/dev/rootJs/dynamic.mjs');
+  const { sum } = await import('./dynamic.mjs');
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return sum(a, b);
