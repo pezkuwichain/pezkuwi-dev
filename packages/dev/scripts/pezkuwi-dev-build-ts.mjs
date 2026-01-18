@@ -792,7 +792,8 @@ function buildExports () {
       ? pkg.main
       : `./${pkg.main}`;
 
-    pkg.main = main.replace(/^\.\//, './cjs/');
+    // Only add ./cjs/ prefix if main doesn't already start with ./cjs/
+    pkg.main = main.startsWith('./cjs/') ? main : main.replace(/^\.\//, './cjs/');
     pkg.module = main;
     pkg.types = main.replace('.js', '.d.ts');
   }
@@ -806,7 +807,8 @@ function buildExports () {
         ? value
         : `./${value}`;
 
-      pkg[k] = entry.replace(/^\.\//, './cjs/');
+      // Only add ./cjs/ prefix if entry doesn't already start with ./cjs/
+      pkg[k] = entry.startsWith('./cjs/') ? entry : entry.replace(/^\.\//, './cjs/');
     }
   });
 
