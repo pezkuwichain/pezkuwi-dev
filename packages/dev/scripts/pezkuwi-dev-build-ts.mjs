@@ -363,24 +363,24 @@ function rewriteImports (dir, pkgCwd, pkgJson, replacer) {
             .filter((line) => !line.startsWith('//'))
             .map((line) =>
               line
-                // handle import/export
-                .replace(/(import|export) (.*) from '(.*)'/g, (o, t, a, f) => {
+                // handle import/export (use [^']* to avoid capturing 'json' from with { type: 'json' })
+                .replace(/(import|export) (.*) from '([^']*)'/g, (o, t, a, f) => {
                   const adjusted = replacer(pkgCwd, pkgJson, dir, f);
 
                   return adjusted
                     ? `${t} ${a} from '${adjusted}'`
                     : o;
                 })
-                // handle augmented inputs
-                .replace(/(import|declare module) '(.*)'/g, (o, t, f) => {
+                // handle augmented inputs (use [^']* to avoid capturing quotes from import attributes)
+                .replace(/(import|declare module) '([^']*)'/g, (o, t, f) => {
                   const adjusted = replacer(pkgCwd, pkgJson, dir, f, t !== 'import');
 
                   return adjusted
                     ? `${t} '${adjusted}'`
                     : o;
                 })
-                // handle dynamic imports
-                .replace(/( import|^import)\('(.*)'\)/g, (o, t, f) => {
+                // handle dynamic imports (use [^']* for consistency)
+                .replace(/( import|^import)\('([^']*)'\)/g, (o, t, f) => {
                   const adjusted = replacer(pkgCwd, pkgJson, dir, f);
 
                   return adjusted
@@ -445,7 +445,10 @@ function buildDeno () {
  * @returns {string}
  */
 function relativePath (value) {
-  return `${value && value.startsWith('.') ? value : './'}${value}`.replace(/\/\//g, '/');
+  if (!value || typeof value !== 'string') {
+    return '';
+  }
+  return value.startsWith('.') ? value : `./${value}`;
 }
 
 /**
@@ -643,7 +646,7 @@ function findFiles (buildDir, extra = '', exclude = []) {
     .readdirSync(currDir)
     .filter((f) => !exclude.includes(f))
     .reduce((/** @type {[string, Record<String, unknown> | string][]} */ all, jsName) => {
-      const jsPath = `${extra}/${jsName}`;
+      const jsPath = extra ? `${extra}/${jsName}` : jsName;
       const fullPathEsm = path.join(buildDir, jsPath);
 
       if (fs.statSync(fullPathEsm).isDirectory()) {
@@ -788,11 +791,14 @@ function buildExports () {
   }
 
   if (pkg.main) {
-    const main = pkg.main.startsWith('./')
+    let main = pkg.main.startsWith('./')
       ? pkg.main
       : `./${pkg.main}`;
 
-    // Only add ./cjs/ prefix if main doesn't already start with ./cjs/
+    // Strip ./build/ prefix if present (source package.json may have ./build/cjs/index.js)
+    main = main.replace(/^\.\/build\//, './');
+
+    // Add ./cjs/ prefix if not already present (for CJS entry point)
     pkg.main = main.startsWith('./cjs/') ? main : main.replace(/^\.\//, './cjs/');
     pkg.module = main;
     pkg.types = main.replace('.js', '.d.ts');
@@ -803,11 +809,14 @@ function buildExports () {
     const value = pkg[k];
 
     if (typeof value === 'string') {
-      const entry = value.startsWith('./')
+      let entry = value.startsWith('./')
         ? value
         : `./${value}`;
 
-      // Only add ./cjs/ prefix if entry doesn't already start with ./cjs/
+      // Strip ./build/ prefix if present
+      entry = entry.replace(/^\.\/build\//, './');
+
+      // Add ./cjs/ prefix if not already present
       pkg[k] = entry.startsWith('./cjs/') ? entry : entry.replace(/^\.\//, './cjs/');
     }
   });

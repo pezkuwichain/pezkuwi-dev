@@ -1,22 +1,22 @@
 {
   "author": "Pezkuwi Team <team@pezkuwichain.app>",
-  "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
+  "bugs": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/issues",
   "description": "A collection of shared CI scripts and development environment used by @pezkuwi projects",
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/pezkuwichain/pezkuwi-dev/tree/master/packages/dev#readme",
+  "homepage": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/tree/master/packages/dev#readme",
   "license": "Apache-2.0",
   "name": "@pezkuwi/dev",
   "repository": {
     "directory": "packages/dev",
     "type": "git",
-    "url": "https://github.com/pezkuwichain/pezkuwi-dev.git"
+    "url": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev.git"
   },
   "sideEffects": false,
   "type": "module",
   "types": "./index.d.ts",
-  "version": "0.85.5",
+  "version": "0.85.11",
   "main": "./cjs/index.js",
   "module": "./index.js",
   "bin": {

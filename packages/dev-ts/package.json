@@ -1,17 +1,17 @@
 {
   "author": "Pezkuwi Team <team@pezkuwichain.app>",
-  "bugs": "https://github.com/pezkuwichain/pezkuwi-dev/issues",
+  "bugs": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/issues",
   "description": "An TS -> ESM loader for Node >= 16.12",
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/pezkuwichain/pezkuwi-dev/tree/master/packages/dev-ts#readme",
+  "homepage": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/tree/master/packages/dev-ts#readme",
   "license": "Apache-2.0",
   "name": "@pezkuwi/dev-ts",
   "repository": {
     "directory": "packages/dev-ts",
     "type": "git",
-    "url": "https://github.com/pezkuwichain/pezkuwi-dev.git"
+    "url": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev.git"
   },
   "sideEffects": false,
   "type": "module",
