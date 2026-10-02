@@ -938,13 +938,33 @@ function getEnginesVer (currVer) {
 }
 
 /**
- * @param {string} repoPath
+ * The repository's web address, taken from the root package.json as declared.
+ *
+ * This used to split on 'https://github.com/', which threw on any other host and,
+ * where it did not throw, rewrote every published package back to GitHub. The
+ * declared host is the authority; this only normalises its spelling.
+ *
+ * @param {string} url
+ * @returns {string} e.g. https://git.example.org/owner/repo (no trailing .git)
+ */
+function repoBaseFromUrl (url) {
+  if (!url) {
+    throw new Error('package.json has no repository.url');
+  }
+
+  const parsed = new URL(url.replace(/^git\+/, ''));
+
+  return `${parsed.protocol}//${parsed.host}${parsed.pathname.replace(/\.git$/, '').replace(/\/$/, '')}`;
+}
+
+/**
+ * @param {string} repoBase
  * @param {string | null} dir
  * @param {PkgJson} json
  */
-function orderPackageJson (repoPath, dir, json) {
-  json.bugs = `https://github.com/${repoPath}/issues`;
-  json.homepage = `https://github.com/${repoPath}${dir ? `/tree/master/packages/${dir}` : ''}#readme`;
+function orderPackageJson (repoBase, dir, json) {
+  json.bugs = `${repoBase}/issues`;
+  json.homepage = `${repoBase}${dir ? `/tree/master/packages/${dir}` : ''}#readme`;
   json.license = !json.license || json.license === 'Apache-2'
     ? 'Apache-2.0'
     : json.license;
@@ -954,7 +974,7 @@ function orderPackageJson (repoPath, dir, json) {
       : {}
     ),
     type: 'git',
-    url: `https://github.com/${repoPath}.git`
+    url: `${repoBase}.git`
   };
   json.sideEffects = json.sideEffects || false;
   json.engines = {
@@ -1284,12 +1304,12 @@ function extractPackageInfoImports (filepath, withDetectImport) {
 
 /**
  * @param {CompileType} compileType
- * @param {string} repoPath
+ * @param {string} repoBase
  * @param {string} dir
  * @param {[string, string][]} locals
  * @returns {Promise<void>}
  */
-async function buildJs (compileType, repoPath, dir, locals) {
+async function buildJs (compileType, repoBase, dir, locals) {
   const pkgJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), './package.json'), 'utf-8'));
   const { name, version } = pkgJson;
 
@@ -1301,7 +1321,7 @@ async function buildJs (compileType, repoPath, dir, locals) {
 
   console.log(`*** ${name} ${version}`);
 
-  orderPackageJson(repoPath, dir, pkgJson);
+  orderPackageJson(repoBase, dir, pkgJson);
 
   // move the tsc-generated *.d.ts build files to build-tsc
   if (fs.existsSync('build')) {
@@ -1471,11 +1491,9 @@ async function main () {
     }
   }
 
-  const repoPath = pkg.repository.url
-    .split('https://github.com/')[1]
-    .split('.git')[0];
+  const repoBase = repoBaseFromUrl(pkg.repository?.url);
 
-  orderPackageJson(repoPath, null, pkg);
+  orderPackageJson(repoBase, null, pkg);
   execPm('pezkuwi-exec-tsc --build tsconfig.build.json');
 
   process.chdir('packages');
@@ -1503,7 +1521,7 @@ async function main () {
   for (const dir of dirs) {
     process.chdir(dir);
 
-    await buildJs(compileType, repoPath, dir, locals);
+    await buildJs(compileType, repoBase, dir, locals);
 
     process.chdir('..');
   }
