@@ -3,15 +3,15 @@
 
 import type { Describe, It } from '@pezkuwi/dev-test/env/suite.js';
 
-declare const describe: Describe;
-declare const it: It;
-declare const expect: (value: unknown) => { toBe: (expected: boolean) => void; toEqual: (expected: unknown) => void };
-
 import fs from 'node:fs';
 import path from 'node:path';
 
 import * as testRoot from './root.js';
 import { runTests } from './rootTests.js';
+
+declare const describe: Describe;
+declare const it: It;
+declare const expect: (value: unknown) => { toBe: (expected: boolean) => void; toEqual: (expected: unknown) => void };
 
 runTests(testRoot);
 
@@ -91,8 +91,8 @@ describe('as-built output checks', (): void => {
             jsIdx[type].includes(
               type === 'cjs'
                 ? 'require("@pezkuwi/dev/rootJs/testJson.json")'
-                // eslint-disable-next-line no-useless-escape
-                : "import testJson from '@pezkuwi/dev/rootJs/testJson.json' assert { type: \'json\' };"
+                // `with`, not `assert`: Node 22 removed import assertions
+                : "import testJson from '@pezkuwi/dev/rootJs/testJson.json' with { type: 'json' };"
             )
           ).toBe(true);
         })
