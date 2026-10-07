@@ -10,7 +10,6 @@ import standardConfig from 'eslint-config-standard';
 import deprecationPlugin from 'eslint-plugin-deprecation';
 // @ts-expect-error No definition for this one
 import headerPlugin from 'eslint-plugin-header';
-// @ts-expect-error No definition for this one
 import importPlugin from 'eslint-plugin-import';
 // @ts-expect-error No definition for this one
 import importNewlinesPlugin from 'eslint-plugin-import-newlines';
@@ -20,7 +19,6 @@ import jestPlugin from 'eslint-plugin-jest';
 import nPlugin from 'eslint-plugin-n';
 // @ts-expect-error No definition for this one
 import promisePlugin from 'eslint-plugin-promise';
-// @ts-expect-error No definition for this one
 import reactPlugin from 'eslint-plugin-react';
 // @ts-expect-error No definition for this one
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
