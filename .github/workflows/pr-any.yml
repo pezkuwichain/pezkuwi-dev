@@ -3,8 +3,8 @@ on: [pull_request]
 
 jobs:
   pr:
-    continue-on-error: true
     strategy:
+      fail-fast: false
       matrix:
         step: ['lint', 'test', 'build', 'docs']
     runs-on: ubuntu-latest
