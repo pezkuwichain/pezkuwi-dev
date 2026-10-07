@@ -6,6 +6,14 @@
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     /**
+     * JavaScript sources are type-checked like the rest. The base set this
+     * until @tsconfig/strictest 2.0.8 dropped checkJs, which left every .js and
+     * .mjs file outside the program: lint could not parse them with type info.
+     */
+    "allowJs": true,
+    "checkJs": true,
+
+    /**
      * Aligns with packages/dev/scripts/pezkuwi-dev-build-ts & packages/dev-ts/src/loader
      * (target here is specifically tied to the minimum supported Node version)
      */
