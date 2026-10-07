@@ -73,7 +73,12 @@ async function compileJs (compileType, type) {
 
         const source = fs.readFileSync(filename, 'utf-8');
 
-        // compile with the options aligning with our tsconfig
+        // compile with the options aligning with our tsconfig. CJS is emitted
+        // under Node's own rules (NodeNext; a lone file is taken as CommonJS):
+        // CommonJS with NodeNext resolution kept `import()` of an ES module on
+        // TypeScript 5.5 and turned it into require() from 5.6 on, which an ES
+        // module cannot answer on Node before 22 (rootEsm.spec "contains
+        // import(...) in cjs").
         const { outputText } = ts.transpileModule(source, {
           compilerOptions: {
             esModuleInterop: true,
@@ -82,11 +87,12 @@ async function compileJs (compileType, type) {
               ? ts.JsxEmit.ReactJSX
               : undefined,
             module: type === 'cjs'
-              ? ts.ModuleKind.CommonJS
+              ? ts.ModuleKind.NodeNext
               : ts.ModuleKind.ESNext,
             moduleResolution: ts.ModuleResolutionKind.NodeNext,
             target: TARGET_TSES
-          }
+          },
+          fileName: filename
         });
 
         mkdirpSync(path.dirname(outFile));
@@ -448,6 +454,7 @@ function relativePath (value) {
   if (!value || typeof value !== 'string') {
     return '';
   }
+
   return value.startsWith('.') ? value : `./${value}`;
 }
 
