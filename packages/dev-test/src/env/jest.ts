@@ -32,7 +32,7 @@ function extendMock <F extends AnyFn> (mocked: WithMock<F>) {
   //
   // Effectively the casts below ensure that our WithMock<*> aligns
   // on a high-level to what we use via private type...
-  const spy = (mocked as unknown as ReturnType<typeof mock['fn']>);
+  const spy = mocked as unknown as ReturnType<typeof mock['fn']>;
 
   return enhanceObj(enhanceObj(mocked, {
     mockImplementation: <F extends AnyFn> (fn: F): void => {

@@ -11,4 +11,13 @@ import type * as testRoot from './root.js';
 import testRootBuild from '../build/cjs/root.js';
 import { runTests } from './rootTests.js';
 
-runTests(testRootBuild as unknown as typeof testRoot);
+/**
+ * The CommonJS build is untyped until it is built, and lint runs both before
+ * and after the build. Casting from unknown here is needed either way, so the
+ * outcome does not depend on whether build/ exists.
+ */
+function asRoot (build: unknown): typeof testRoot {
+  return build as typeof testRoot;
+}
+
+runTests(asRoot(testRootBuild));

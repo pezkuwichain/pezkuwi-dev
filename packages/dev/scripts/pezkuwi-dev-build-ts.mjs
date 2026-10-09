@@ -1119,8 +1119,8 @@ function lintInput (dir) {
       // file will also be caught in the net, i.e. we expect all files to conform
       if (n === 0 && (
         !/\/\/ Copyright .* @pezkuwi\//.test(l) &&
-        !/\/\/ Auto-generated via `/.test(l) &&
-        !/#!\/usr\/bin\/env node/.test(l)
+        !l.includes('// Auto-generated via `') &&
+        !l.includes('#!/usr/bin/env node')
       )) {
         return createError(full, l, n, 'Invalid header definition');
       }
@@ -1281,7 +1281,7 @@ function extractPackageInfoImports (filepath, withDetectImport) {
     .readFileSync(filepath, { encoding: 'utf-8' })
     .split('\n')
     .forEach((l) => {
-      const match = l.match(/import \{ packageInfo as (.*) \}/);
+      const match = /import \{ packageInfo as (.*) \}/.exec(l);
 
       if (match) {
         otherImports.push(l);
@@ -1290,8 +1290,8 @@ function extractPackageInfoImports (filepath, withDetectImport) {
     });
 
   otherImports.sort((a, b) => {
-    const am = a.match(/\} from '(.*)';/);
-    const bm = b.match(/\} from '(.*)';/);
+    const am = /\} from '(.*)';/.exec(a);
+    const bm = /\} from '(.*)';/.exec(b);
 
     if (!am) {
       throw new Error(`Unable to extract from import from ${a}`);

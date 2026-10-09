@@ -83,7 +83,7 @@ export function copyDirSync (src, dest, include, exclude) {
         if (fs.statSync(srcPath).isDirectory()) {
           copyDirSync(srcPath, path.join(dest, file), include, exclude);
         } else if (!include?.length || include.some((e) => file.endsWith(e))) {
-          if (!exclude || !exclude.some((e) => file.endsWith(e))) {
+          if (!exclude?.some((e) => file.endsWith(e))) {
             copyFileSync(srcPath, dest);
           }
         }
@@ -480,7 +480,7 @@ export function topoSort (dirs) {
     visited[key] = true;
 
     node.vertices.forEach((i) => {
-      if (ancestors.indexOf(i) >= 0) {
+      if (ancestors.includes(i)) {
         console.log('CIRCULAR: closed chain : ' + i + ' is in ' + id);
 
         if (nodes[id].vertices.includes(i)) {

@@ -6,7 +6,7 @@ export type AnyFn = (...args: any[]) => any;
 
 export type BaseObj = Record<string, unknown>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export type BaseFn = Function;
 
 export type StubFn = (...args: unknown[]) => unknown;
@@ -25,4 +25,4 @@ export type WithMock<F extends AnyFn> = F & {
     resetCalls: () => void;
     restore: () => void;
   }
-}
+};

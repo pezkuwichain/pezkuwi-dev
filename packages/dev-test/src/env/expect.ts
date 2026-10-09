@@ -164,7 +164,7 @@ function assertMatchStr (value: unknown, check: string | RegExp): void {
  *
  * @see https://github.com/facebook/jest/blob/a49c88610e49a3242576160740a32a2fe11161e1/packages/expect/src/asymmetricMatchers.ts#L103-L133
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function assertInstanceOf (value: unknown, Clazz: Function): void {
   assert.ok(
     (Clazz === Array && Array.isArray(value)) ||
@@ -188,7 +188,7 @@ function assertInstanceOf (value: unknown, Clazz: Function): void {
  * @param {string | unknown[]} value
  * @param {string} check
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function assertIncludes (value: string | unknown[], [check, Clazz]: [string, Function]): void {
   assertInstanceOf(value, Clazz);
   assert.ok(value?.includes(check), `${value as string} does not include ${check}`);
@@ -201,7 +201,7 @@ function assertIncludes (value: string | unknown[], [check, Clazz]: [string, Fun
  **/
 export function expect () {
   const rootMatchers = {
-    // eslint-disable-next-line @typescript-eslint/ban-types
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     any: (Clazz: Function) => new Matcher(assertInstanceOf, Clazz),
     anything: () => new Matcher(assertNonNullish),
     arrayContaining: (check: string) => new Matcher(assertIncludes, [check, Array]),
@@ -229,7 +229,7 @@ export function expect () {
         toBe: (other: unknown) => assert.strictEqual(value, other),
         toBeDefined: () => assert.ok(value !== undefined),
         toBeFalsy: () => assert.ok(!value),
-        // eslint-disable-next-line @typescript-eslint/ban-types
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
         toBeInstanceOf: (Clazz: Function) => assertInstanceOf(value, Clazz),
         toBeNull: (value: unknown) => assert.ok(value === null),
         toBeTruthy: () => assert.ok(value),

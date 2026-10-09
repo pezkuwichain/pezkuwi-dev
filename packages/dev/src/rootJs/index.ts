@@ -22,7 +22,6 @@ export async function dynamic (a: number, b: number): Promise<number> {
   // and CJS output (a './dynamic' import would be different otherwise)
   const { sum } = await import('@pezkuwi/dev/rootJs/dynamic.mjs');
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return sum(a, b);
 }
 
