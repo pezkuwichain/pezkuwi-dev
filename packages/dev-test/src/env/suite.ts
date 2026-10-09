@@ -35,10 +35,10 @@ const MINUTE = 60 * 1000;
  * Wraps either describe or it with relevant .only, .skip, .todo & .each helpers,
  * shimming it into a Jest-compatible environment.
  *
- * @param {} fn
+ * Describe and It have the same shape, so one return type serves both.
  */
-function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number): Describe | It {
-  const wrap = (opts: WrapOpts) => (name: string, exec: () => void | Promise<void>, timeout?: number) => fn(name, { ...opts, timeout: (timeout || defaultTimeout) }, exec) as unknown as void;
+function createWrapper (fn: WrapFn, defaultTimeout: number): Describe {
+  const wrap = (opts: WrapOpts): TestFn => (name: string, exec: () => void | Promise<void>, timeout?: number) => fn(name, { ...opts, timeout: (timeout || defaultTimeout) }, exec) as unknown as void;
 
   // Ensure that we have consistent helpers on the function. These are not consistently
   // applied accross all node:test versions, latest has all, so always apply ours.
@@ -47,7 +47,7 @@ function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number): Descr
     only: wrap({ only: true }),
     skip: wrap({ skip: true }),
     todo: wrap({ todo: true })
-  }) as Describe | It;
+  });
 }
 
 /**
@@ -56,7 +56,7 @@ function createWrapper <T extends WrapFn> (fn: T, defaultTimeout: number): Descr
  **/
 export function suite (): { describe: Describe; it: It } {
   return {
-    describe: createWrapper(describe, 60 * MINUTE) as Describe,
-    it: createWrapper(it, 2 * MINUTE) as It
+    describe: createWrapper(describe, 60 * MINUTE),
+    it: createWrapper(it, 2 * MINUTE)
   };
 }

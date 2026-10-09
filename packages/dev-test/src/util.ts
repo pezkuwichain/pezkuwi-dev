@@ -27,7 +27,7 @@ function createStub <N extends readonly string[]> (keys: N, creator: (key: strin
     obj[key] ??= creator(key);
 
     return obj;
-  }, {}) as unknown as { [K in N[number]]: StubFn };
+  }, {}) as unknown as Record<N[number], StubFn>;
 }
 
 /**

@@ -7,7 +7,7 @@ export class Clazz {
   readonly and: number;
 
   static staticProperty = 'foobar';
-  static staticFunction = (): string|null => Clazz.staticProperty;
+  static staticFunction = (): string | null => Clazz.staticProperty;
 
   /**
    * @param and the number we should and with

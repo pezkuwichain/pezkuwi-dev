@@ -122,7 +122,7 @@ function getFilename (r) {
       .split('\n')
       .map((l) => l.trim())
       .filter((l) => l.startsWith('at ') && (l.includes('.spec.') || l.includes('.test.')))
-      .map((l) => l.match(/\(.*:\d\d?:\d\d?\)$/)?.[0])
+      .map((l) => (/\(.*:\d\d?:\d\d?\)$/.exec(l))?.[0])
       .map((l) => l?.replace('(', '')?.replace(')', ''));
 
     if (stack.length) {
@@ -186,7 +186,7 @@ function complete () {
 
       if (typeof r === 'string') {
         console.log(r); // Node.js <= 18.14
-      } else if (r.file && r.file.includes('@pezkuwi/dev/scripts')) {
+      } else if (r.file?.includes('@pezkuwi/dev/scripts')) {
         // Ignore internal diagnostics
       } else {
         if (lastFilename !== r.file) {
@@ -328,11 +328,11 @@ if (isMainThread) {
 } else {
   run({ files: workerData.files, timeout: 3_600_000 })
     .on('data', () => undefined)
-    .on('end', () => parentPort && parentPort.postMessage(stats))
+    .on('end', () => parentPort?.postMessage(stats))
     .on('test:coverage', () => undefined)
     .on('test:diagnostic', (/** @type {DiagStat} */data) => {
       stats.diag.push(data);
-      parentPort && parentPort.postMessage({ data: stats, type: 'result' });
+      parentPort?.postMessage({ data: stats, type: 'result' });
     })
     .on('test:fail', (/** @type {FailStat} */ data) => {
       const statFail = structuredClone(data);
@@ -343,7 +343,7 @@ if (isMainThread) {
 
       stats.fail.push(statFail);
       stats.total++;
-      parentPort && parentPort.postMessage({ data: 'x', type: 'progress' });
+      parentPort?.postMessage({ data: 'x', type: 'progress' });
 
       if (bail) {
         complete();
@@ -361,7 +361,7 @@ if (isMainThread) {
       }
 
       stats.total++;
-      parentPort && parentPort.postMessage({ data: symbol, type: 'progress' });
+      parentPort?.postMessage({ data: symbol, type: 'progress' });
     })
     .on('test:plan', () => undefined)
     .on('test:start', () => undefined);

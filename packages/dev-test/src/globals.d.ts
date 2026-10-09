@@ -1,8 +1,6 @@
 // Copyright 2017-2026 @pezkuwi/dev-test authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-/* eslint-disable no-var */
-
 import type { expect } from './env/expect.js';
 import type { jest } from './env/jest.js';
 import type { lifecycle } from './env/lifecycle.js';
