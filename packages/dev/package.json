@@ -28,6 +28,7 @@
     "pezkuwi-dev-copy-dir": "./scripts/pezkuwi-dev-copy-dir.mjs",
     "pezkuwi-dev-copy-to": "./scripts/pezkuwi-dev-copy-to.mjs",
     "pezkuwi-dev-deno-map": "./scripts/pezkuwi-dev-deno-map.mjs",
+    "pezkuwi-dev-migrate-eslint10": "./scripts/pezkuwi-dev-migrate-eslint10.mjs",
     "pezkuwi-dev-run-lint": "./scripts/pezkuwi-dev-run-lint.mjs",
     "pezkuwi-dev-run-node-ts": "./scripts/pezkuwi-dev-run-node-ts.mjs",
     "pezkuwi-dev-run-test": "./scripts/pezkuwi-dev-run-test.mjs",
