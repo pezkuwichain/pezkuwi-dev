@@ -38,14 +38,40 @@ const header = '/* eslint-disable @stylistic/quotes */';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 `;
 
-function inRepo (content: string, args: string[] = []): { out: string; code: number; file: string } {
+const CONFIG_BEFORE = `export default [
+  {
+    files: ['**/*.ts'],
+    rules: {
+      'deprecation/deprecation': 'off',
+      "import/extensions": 'off',
+      indent: 'off',
+      'no-console': 'error'
+    }
+  }
+];
+`;
+
+const CONFIG_AFTER = `export default [
+  {
+    files: ['**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-deprecated': 'off',
+      'import-x/extensions': 'off',
+      '@stylistic/indent': 'off',
+      'no-console': 'error'
+    }
+  }
+];
+`;
+
+function inRepo (content: string, args: string[] = [], name = 'sample.ts'): { out: string; code: number; file: string } {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'migrate-eslint10-'));
-  const file = path.join(dir, 'sample.ts');
+  const file = path.join(dir, name);
 
   try {
     fs.writeFileSync(file, content);
     execFileSync('git', ['init', '-q'], { cwd: dir });
-    execFileSync('git', ['add', 'sample.ts'], { cwd: dir });
+    execFileSync('git', ['add', name], { cwd: dir });
 
     let code = 0;
     let out = '';
@@ -68,14 +94,31 @@ describe('pezkuwi-dev-migrate-eslint10', (): void => {
     const { file, out } = inRepo(BEFORE);
 
     expect(file).toEqual(AFTER);
-    expect(out.includes('rewrote 8 directive(s) in 1 file(s)')).toEqual(true);
+    expect(out.includes('rewrote 8 directive(s) and 0 config key(s) in 1 file(s)')).toEqual(true);
   });
 
   it('leaves current rule names and bare disables alone', (): void => {
     const { file, out } = inRepo(AFTER);
 
     expect(file).toEqual(AFTER);
-    expect(out.includes('rewrote 0 directive(s) in 0 file(s)')).toEqual(true);
+    expect(out.includes('rewrote 0 directive(s) and 0 config key(s) in 0 file(s)')).toEqual(true);
+  });
+
+  it('renames rule keys in eslint.config.*, and only rule keys', (): void => {
+    const { code, file, out } = inRepo(CONFIG_BEFORE, [], 'eslint.config.js');
+
+    expect(file).toEqual(CONFIG_AFTER);
+    expect(code).toEqual(0);
+    expect(out.includes('rewrote 0 directive(s) and 3 config key(s) in 1 file(s)')).toEqual(true);
+  });
+
+  it('leaves a rule that became several to a hand edit, and exits 1', (): void => {
+    const config = "export default [{ rules: { '@typescript-eslint/ban-types': 'off' } }];\n";
+    const { code, file, out } = inRepo(config, [], 'eslint.config.mjs');
+
+    expect(file).toEqual(config);
+    expect(code).toEqual(1);
+    expect(out.includes("by hand: eslint.config.mjs: '@typescript-eslint/ban-types' is now")).toEqual(true);
   });
 
   it('--check reports and changes nothing, exiting 1 when there is work', (): void => {
