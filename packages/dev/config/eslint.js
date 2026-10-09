@@ -22,6 +22,7 @@ import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
 import globals from 'globals';
 
+import { directiveLines } from './eslint.directives.js';
 import { overrideAll, overrideJs, overrideJsx, overrideSpec } from './eslint.rules.js';
 import { standardRules } from './eslint.standard.js';
 import { withoutContextualAssertions } from './eslint.typeAssertion.js';
@@ -127,6 +128,8 @@ export default [
   },
   {
     files: extsToGlobs(EXT_ALL),
+    // see eslint.directives.js
+    processor: directiveLines,
     rules: {
       ...eslintJs.configs.recommended.rules,
       ...standardRules,
