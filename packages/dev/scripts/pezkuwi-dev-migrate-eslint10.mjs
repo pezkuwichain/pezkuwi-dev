@@ -14,7 +14,9 @@
 //   pezkuwi-dev-migrate-eslint10 --check   # report, change nothing (exit 1 if anything would change)
 //
 // It also rewrites such comments inside string literals, which is how code
-// generators emit them.
+// generators emit them, and the rule keys of the repository's own
+// eslint.config.* ('import/extensions': 'off'). A rule that became several
+// is reported for a hand edit there, and the tool then exits 1.
 
 import stylisticPlugin from '@stylistic/eslint-plugin';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
@@ -96,6 +98,38 @@ const files = execFileSync('git', ['ls-files', '-z', '--', '*.ts', '*.tsx', '*.j
 const check = process.argv.includes('--check');
 let changedFiles = 0;
 let changedComments = 0;
+let changedKeys = 0;
+/** @type {string[]} */
+const manual = [];
+
+// Rule keys in a repository's own eslint config ('import/extensions': 'off'),
+// quoted or not. Only in eslint.config.* files, where such a key is a rule.
+const CONFIG_FILE = /(^|\/)eslint\.config\.[cm]?[jt]s$/;
+const CONFIG_KEY = /(^|[{,\s])(['"]?)([@a-z][\w@/-]*)\2(\s*:)/g;
+
+/**
+ * @param {string} file
+ * @param {string} src
+ * @returns {string}
+ */
+function renameConfigKeys (file, src) {
+  return src.replace(CONFIG_KEY, (/** @type {string} */ all, /** @type {string} */ pre, /** @type {string} */ _quote, /** @type {string} */ name, /** @type {string} */ colon) => {
+    const next = rename(name);
+
+    if (next.length === 1 && next[0] === name) {
+      return all;
+    } else if (next.length !== 1) {
+      // one rule became several: the value has to be repeated for each, by hand
+      manual.push(`${file}: '${name}' is now ${next.join(', ')}`);
+
+      return all;
+    }
+
+    changedKeys++;
+
+    return `${pre}'${next[0]}'${colon}`;
+  });
+}
 
 for (const file of files) {
   const src = fs.readFileSync(file, 'utf-8');
@@ -116,19 +150,27 @@ for (const file of files) {
     return `${kind}${gap}${next.join(', ')}${tail}`;
   });
 
-  if (out !== src) {
+  const outKeys = CONFIG_FILE.test(file)
+    ? renameConfigKeys(file, out)
+    : out;
+
+  if (outKeys !== src) {
     changedFiles++;
 
     if (check) {
       console.log(`would change: ${file}`);
     } else {
-      fs.writeFileSync(file, out);
+      fs.writeFileSync(file, outKeys);
     }
   }
 }
 
-console.log(`${check ? 'would rewrite' : 'rewrote'} ${changedComments} directive(s) in ${changedFiles} file(s)`);
+for (const line of manual) {
+  console.log(`by hand: ${line}`);
+}
 
-if (check && changedFiles) {
+console.log(`${check ? 'would rewrite' : 'rewrote'} ${changedComments} directive(s) and ${changedKeys} config key(s) in ${changedFiles} file(s)`);
+
+if ((check && changedFiles) || manual.length) {
   process.exit(1);
 }
