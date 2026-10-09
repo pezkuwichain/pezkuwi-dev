@@ -7,8 +7,6 @@ import yargs from 'yargs';
 
 import { __dirname, execPm, GITHUB_REPO, logBin } from './util.mjs';
 
-const TS_CONFIG_BUILD = true;
-
 logBin('pezkuwi-dev-run-lint');
 
 // Since yargs can also be a promise, we just relax the type here completely
@@ -36,5 +34,11 @@ if (!argv['skip-eslint']) {
 }
 
 if (!argv['skip-tsc']) {
-  execPm(`pezkuwi-exec-tsc --noEmit --emitDeclarationOnly false --pretty${TS_CONFIG_BUILD ? ' --project tsconfig.build.json' : ''}`);
+  // The root tsconfig.build.json has `files: []` and only references the
+  // packages, so `tsc --project` on it checks no file at all. --build follows
+  // the references; it cannot be combined with --noEmit, so it writes the
+  // declarations the build would. Previous build output is removed first, since
+  // package configs without an `include` would otherwise pick it up as source.
+  execPm('pezkuwi-dev-clean-build');
+  execPm('pezkuwi-exec-tsc --build tsconfig.build.json --pretty');
 }
