@@ -22,9 +22,11 @@ import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import sortDestructureKeysPlugin from 'eslint-plugin-sort-destructure-keys';
 import globals from 'globals';
 
+import { directiveLines } from './eslint.directives.js';
 import { overrideAll, overrideJs, overrideJsx, overrideSpec } from './eslint.rules.js';
 import { standardRules } from './eslint.standard.js';
 import { withoutContextualAssertions } from './eslint.typeAssertion.js';
+import { withoutExportAllFix } from './eslint.typeExports.js';
 
 /**
  * eslint-plugin-header declares no options schema, and eslint 9+ rejects
@@ -94,8 +96,8 @@ export default [
     },
     plugins: {
       '@stylistic': stylisticPlugin,
-      // see eslint.typeAssertion.js
-      '@typescript-eslint': withoutContextualAssertions(tsPlugin),
+      // see eslint.typeAssertion.js and eslint.typeExports.js
+      '@typescript-eslint': withoutExportAllFix(withoutContextualAssertions(tsPlugin)),
       // eslint-plugin-header reports at the first token after the leading
       // comments, so a generated file's /* eslint-disable */ covers it; the
       // maintained fork reports at line 1 instead. The compat layer supplies the
@@ -126,6 +128,8 @@ export default [
   },
   {
     files: extsToGlobs(EXT_ALL),
+    // see eslint.directives.js
+    processor: directiveLines,
     rules: {
       ...eslintJs.configs.recommended.rules,
       ...standardRules,
