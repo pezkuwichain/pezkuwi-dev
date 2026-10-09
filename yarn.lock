@@ -1198,7 +1198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pezkuwi/dev-test@npm:^0.86.2, @pezkuwi/dev-test@workspace:packages/dev-test":
+"@pezkuwi/dev-test@npm:^0.86.3, @pezkuwi/dev-test@workspace:packages/dev-test":
   version: 0.0.0-use.local
   resolution: "@pezkuwi/dev-test@workspace:packages/dev-test"
   dependencies:
@@ -1214,7 +1214,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pezkuwi/dev-ts@npm:^0.86.2, @pezkuwi/dev-ts@workspace:packages/dev-ts":
+"@pezkuwi/dev-ts@npm:^0.86.3, @pezkuwi/dev-ts@workspace:packages/dev-ts":
   version: 0.0.0-use.local
   resolution: "@pezkuwi/dev-ts@workspace:packages/dev-ts"
   dependencies:
@@ -1230,8 +1230,8 @@ __metadata:
   dependencies:
     "@eslint/compat": "npm:^2.1.1"
     "@eslint/js": "npm:^10.0.1"
-    "@pezkuwi/dev-test": "npm:^0.86.2"
-    "@pezkuwi/dev-ts": "npm:^0.86.2"
+    "@pezkuwi/dev-test": "npm:^0.86.3"
+    "@pezkuwi/dev-ts": "npm:^0.86.3"
     "@rollup/plugin-alias": "npm:^5.1.1"
     "@rollup/plugin-commonjs": "npm:^29.0.3"
     "@rollup/plugin-dynamic-import-vars": "npm:^2.1.5"
