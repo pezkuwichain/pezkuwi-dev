@@ -183,15 +183,66 @@ function assertInstanceOf (value: unknown, Clazz: Function): void {
 /**
  * @internal
  *
- * A helper to ensure that the supplied string/array does include the checker string.
+ * True when an asymmetric matcher appears anywhere in the expected value
+ */
+function containsMatcher (check: unknown): boolean {
+  return check instanceof Matcher ||
+    (Array.isArray(check)
+      ? check.some(containsMatcher)
+      : !!check && typeof check === 'object' && Object.values(check).some(containsMatcher));
+}
+
+/**
+ * @internal
  *
- * @param {string | unknown[]} value
- * @param {string} check
+ * Equality as .toEqual has it (deep, loose), with asymmetric matchers
+ * applied wherever they appear in the expected value
+ */
+function assertEqualMatch (value: unknown, check: unknown): void {
+  if (check instanceof Matcher) {
+    check.assertMatch(value);
+  } else if (Array.isArray(check)) {
+    assert.ok(Array.isArray(value), `Expected array value, found ${typeof value}`);
+    assert.ok(value.length === check.length, `Expected array with ${check.length} entries, found ${value.length}`);
+    check.forEach((other, i) => assertEqualMatch(value[i], other));
+  } else if (check && typeof check === 'object' && containsMatcher(check)) {
+    assert.ok(value && typeof value === 'object', `Expected object value, found ${typeof value}`);
+    assert.deepEqual(Object.keys(value).sort(), Object.keys(check).sort());
+    Object
+      .entries(check)
+      .forEach(([key, other]) => assertEqualMatch((value as Record<string, unknown>)[key], other));
+  } else {
+    assert.deepEqual(value, check);
+  }
+}
+
+/**
+ * @internal
+ *
+ * For a string, that it contains the expected substring; for an array, that
+ * every expected entry equals (or matches) one of its entries
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-function assertIncludes (value: string | unknown[], [check, Clazz]: [string, Function]): void {
+function assertIncludes (value: string | unknown[], [check, Clazz]: [string | unknown[], Function]): void {
   assertInstanceOf(value, Clazz);
-  assert.ok(value?.includes(check), `${value as string} does not include ${check}`);
+
+  if (Array.isArray(check)) {
+    const entries = value as unknown[];
+
+    check.forEach((other) => {
+      assert.ok(entries.some((entry) => {
+        try {
+          assertEqualMatch(entry, other);
+
+          return true;
+        } catch {
+          return false;
+        }
+      }), `Expected array to contain ${JSON.stringify(other)}`);
+    });
+  } else {
+    assert.ok((value as string).includes(check), `${value as string} does not include ${check}`);
+  }
 }
 
 /**
@@ -204,7 +255,7 @@ export function expect () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     any: (Clazz: Function) => new Matcher(assertInstanceOf, Clazz),
     anything: () => new Matcher(assertNonNullish),
-    arrayContaining: (check: string) => new Matcher(assertIncludes, [check, Array]),
+    arrayContaining: (check: unknown[]) => new Matcher(assertIncludes, [check, Array]),
     objectContaining: (check: object) => new Matcher(assertMatchObj, check),
     stringContaining: (check: string) => new Matcher(assertIncludes, [check, String]),
     stringMatching: (check: string | RegExp) => new Matcher(assertMatchStr, check)
@@ -218,7 +269,9 @@ export function expect () {
           toBeDefined: () => assert.ok(value === undefined),
           toBeNull: (value: unknown) => assert.ok(value !== null),
           toBeUndefined: () => assert.ok(value !== undefined),
-          toEqual: (other: unknown) => assert.notDeepEqual(value, other),
+          toEqual: (other: unknown) => containsMatcher(other)
+            ? assert.throws(() => assertEqualMatch(value, other))
+            : assert.notDeepEqual(value, other),
           toHaveBeenCalled: () => assert.ok(!(value as Mocked | undefined)?.mock?.calls.length),
           toThrow: (message?: RegExp | Error | string) => assert.doesNotThrow(value as () => unknown, message && { message } as Error)
         }, stubExpectFnNot),
@@ -234,7 +287,9 @@ export function expect () {
         toBeNull: (value: unknown) => assert.ok(value === null),
         toBeTruthy: () => assert.ok(value),
         toBeUndefined: () => assert.ok(value === undefined),
-        toEqual: (other: unknown) => assert.deepEqual(value, other),
+        toEqual: (other: unknown) => containsMatcher(other)
+          ? assertEqualMatch(value, other)
+          : assert.deepEqual(value, other),
         toHaveBeenCalled: () => assert.ok((value as Mocked | undefined)?.mock?.calls.length),
         toHaveBeenCalledTimes: (count: number) => assert.equal((value as Mocked | undefined)?.mock?.calls.length, count),
         toHaveBeenCalledWith: (...args: unknown[]) => assertSomeCallHasArgs((value as Mocked | undefined), args),
