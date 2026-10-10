@@ -30,7 +30,7 @@
     "docs": "pezkuwi-dev-build-docs",
     "lint": "pezkuwi-dev-run-lint",
     "postinstall": "./packages/dev/scripts/pezkuwi-dev-yarn-only.mjs",
-    "test": "yarn build && pezkuwi-dev-run-test --dev-build --env browser"
+    "test": "yarn build && pezkuwi-dev-run-test --dev-build --experimental-test-module-mocks --env browser"
   },
   "devDependencies": {
     "@pezkuwi/dev": "workspace:packages/dev",

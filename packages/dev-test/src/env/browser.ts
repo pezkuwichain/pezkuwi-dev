@@ -1,7 +1,79 @@
 // Copyright 2017-2026 @pezkuwi/dev-test authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import type { DOMWindow } from 'jsdom';
+
 import { JSDOM } from 'jsdom';
+
+/**
+ * Constructors that Node defines as well. A DOM node only accepts an event
+ * created in its own realm, so in the browser environment the JSDOM ones
+ * replace Node's, as they do under jest-environment-jsdom.
+ */
+export const BROWSER_OVERRIDES: readonly string[] = ['CustomEvent', 'Event'];
+
+/**
+ * JSDOM does no layout, so no element ever changes size and the callback
+ * never runs. JSDOM has no ResizeObserver of its own.
+ */
+class ResizeObserver {
+  observe (): void {
+    // nothing is ever resized
+  }
+
+  unobserve (): void {
+    // nothing is being watched
+  }
+
+  disconnect (): void {
+    // nothing is being watched
+  }
+}
+
+/** The DOM node hierarchy, which libraries check with instanceof */
+function nodes (window: DOMWindow) {
+  return {
+    CharacterData: window.CharacterData,
+    Comment: window.Comment,
+    Document: window.Document,
+    DocumentFragment: window.DocumentFragment,
+    Element: window.Element,
+    Node: window.Node,
+    NodeList: window.NodeList,
+    SVGElement: window.SVGElement,
+    ShadowRoot: window.ShadowRoot,
+    Text: window.Text
+  };
+}
+
+/** Event constructors. Node has its own Event and CustomEvent, see BROWSER_OVERRIDES */
+function events (window: DOMWindow) {
+  return {
+    CompositionEvent: window.CompositionEvent,
+    CustomEvent: window.CustomEvent,
+    Event: window.Event,
+    FocusEvent: window.FocusEvent,
+    InputEvent: window.InputEvent,
+    KeyboardEvent: window.KeyboardEvent,
+    MouseEvent: window.MouseEvent,
+    TouchEvent: window.TouchEvent,
+    UIEvent: window.UIEvent,
+    WheelEvent: window.WheelEvent
+  };
+}
+
+/** Styles, geometry and the observers */
+function layout (window: DOMWindow) {
+  return {
+    // present on the JSDOM window, absent from its DOMWindow type
+    DOMRect: window['DOMRect'] as typeof DOMRect,
+    DOMRectReadOnly: window['DOMRectReadOnly'] as typeof DOMRectReadOnly,
+    MutationObserver: window.MutationObserver,
+    MutationRecord: window.MutationRecord,
+    ResizeObserver,
+    getComputedStyle: window.getComputedStyle.bind(window)
+  };
+}
 
 /**
  * Export a very basic JSDom environment - this is just enough so we have
@@ -15,6 +87,9 @@ export function browser () {
   const { window } = new JSDOM('', { url: 'http://localhost' });
 
   return {
+    ...nodes(window),
+    ...events(window),
+    ...layout(window),
     // All HTML Elements that are defined on the JSDOM window object.
     // (we copied as-is from the types definition). We cannot get this
     // via Object.keys(window).filter(...) so we have to specify explicitly

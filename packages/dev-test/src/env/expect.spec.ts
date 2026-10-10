@@ -255,4 +255,28 @@ describe('expect', () => {
       expect(() => expect([1, 2]).not.toEqual(expect.arrayContaining([2]))).toThrow();
     });
   });
+
+  describe('.toContain', () => {
+    it('finds a substring in a string', () => {
+      expect('voter-alice').toContain('alice');
+      expect(() => expect('voter-alice').toContain('bob')).toThrow();
+    });
+
+    it('finds the item itself in an array or other iterable', () => {
+      const item = { a: 1 };
+
+      expect([1, item]).toContain(item);
+      expect(new Set(['a'])).toContain('a');
+      expect(() => expect([{ a: 1 }]).toContain({ a: 1 })).toThrow();
+    });
+
+    it('rejects a value that is neither a string nor an iterable', () => {
+      expect(() => expect(123).toContain(1)).toThrow();
+    });
+
+    it('supports .not', () => {
+      expect('voter-alice').not.toContain('bob');
+      expect(() => expect([1, 2]).not.toContain(2)).toThrow();
+    });
+  });
 });
