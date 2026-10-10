@@ -58,6 +58,11 @@ for (let i = 0; i < args.length; i++) {
       cmd.push(args[++i]);
       break;
 
+    // node flags with no params
+    case '--experimental-test-module-mocks':
+      nodeFlags.push(args[i]);
+      break;
+
     // node flags that could have additional params
     case '--import':
     case '--loader':

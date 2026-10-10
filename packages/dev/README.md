@@ -252,6 +252,11 @@ This script runs test files in the repository, filtering by file extensions and 
 - **`--logfile <file>`**:  
   Specifies a log file to capture test output.
 
+- **`--experimental-test-module-mocks`**:  
+  Passed to Node.js, enabling `mock.module` from `node:test`. Node only swaps a module that has not
+  been loaded yet, so a spec registers its mocks first and then loads the code under test with a
+  dynamic `import()`.
+
 - **`--import <module>`**:  
   Imports the specified module.
 
