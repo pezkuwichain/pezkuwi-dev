@@ -4,6 +4,13 @@
 import { JSDOM } from 'jsdom';
 
 /**
+ * Constructors that Node defines as well. A DOM node only accepts an event
+ * created in its own realm, so in the browser environment the JSDOM ones
+ * replace Node's, as they do under jest-environment-jsdom.
+ */
+export const BROWSER_OVERRIDES: readonly string[] = ['CustomEvent', 'Event'];
+
+/**
  * Export a very basic JSDom environment - this is just enough so we have
  * @testing-environment/react tests passing in this repo
  *
@@ -15,6 +22,9 @@ export function browser () {
   const { window } = new JSDOM('', { url: 'http://localhost' });
 
   return {
+    // Event constructors, see BROWSER_OVERRIDES
+    CustomEvent: window.CustomEvent,
+    Event: window.Event,
     // All HTML Elements that are defined on the JSDOM window object.
     // (we copied as-is from the types definition). We cannot get this
     // via Object.keys(window).filter(...) so we have to specify explicitly

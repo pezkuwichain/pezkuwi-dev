@@ -23,4 +23,9 @@ describe('browser', () => {
   it('contains HTML*Element', () => {
     expect(typeof all.HTMLElement).toBe('function');
   });
+
+  it('dispatches the global CustomEvent and Event on window', () => {
+    expect(() => window.dispatchEvent(new CustomEvent('custom', { detail: 1 }))).not.toThrow();
+    expect(() => window.dispatchEvent(new Event('plain'))).not.toThrow();
+  });
 });
