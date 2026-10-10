@@ -1,6 +1,8 @@
 // Copyright 2017-2026 @pezkuwi/dev-test authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import { strict as assert } from 'node:assert';
+
 describe('expect', () => {
   it('has been decorated', () => {
     expect(expect(true).not).toBeDefined();
@@ -23,6 +25,58 @@ describe('expect', () => {
       await expect(
         Promise.reject(new Error('this is a rejection message'))
       ).rejects.toThrow(/rejection/);
+    });
+
+    it('matches a rejection containing the message', async () => {
+      await expect(
+        Promise.reject(new Error('Unable to find an element by: [data-testid="x"]\n\n<div />'))
+      ).rejects.toThrow('Unable to find an element by: [data-testid="x"]');
+    });
+
+    it('fails on a rejection without the message', async () => {
+      // typed as void, it returns the promise of assert.rejects
+      await assert.rejects(() =>
+        Promise.resolve(expect(Promise.reject(new Error('another reason'))).rejects.toThrow('rejection'))
+      );
+    });
+  });
+
+  describe('.toBeNull', () => {
+    it('passes on null, and fails on anything else', () => {
+      expect(null).toBeNull();
+      expect(() => expect(undefined).toBeNull()).toThrow();
+      expect(() => expect(0).toBeNull()).toThrow();
+    });
+
+    it('supports .not', () => {
+      expect(undefined).not.toBeNull();
+      expect(() => expect(null).not.toBeNull()).toThrow();
+    });
+  });
+
+  describe('.toHaveLength', () => {
+    it('supports .not', () => {
+      expect([1]).not.toHaveLength(0);
+      expect(() => expect([]).not.toHaveLength(0)).toThrow();
+    });
+  });
+
+  describe('.toHaveProperty', () => {
+    const value = { a: { b: [1, 2] }, c: undefined };
+
+    it('finds a property by key, dotted path or array path', () => {
+      expect(value).toHaveProperty('c');
+      expect(value).toHaveProperty('a.b');
+      expect(value).toHaveProperty(['a', 'b', '1']);
+      expect(() => expect(value).toHaveProperty('a.d')).toThrow();
+      expect(() => expect(null).toHaveProperty('a')).toThrow();
+    });
+
+    it('compares the value when one is given', () => {
+      expect(value).toHaveProperty('a.b', [1, 2]);
+      expect(value).toHaveProperty('a', { b: expect.arrayContaining([2]) });
+      expect(() => expect(value).toHaveProperty('a.b', [1])).toThrow();
+      expect(() => expect(value).toHaveProperty('c', null)).toThrow();
     });
   });
 
@@ -57,6 +111,17 @@ describe('expect', () => {
 
     it('matches error with regex message', () => {
       expect(thrower).toThrow(/me er/);
+    });
+
+    it('matches error containing the message', () => {
+      expect(thrower).toThrow('some');
+      expect(thrower).toThrow(new Error('some error'));
+    });
+
+    it('fails on an error without the message', () => {
+      expect(() => expect(thrower).toThrow('other')).toThrow('Expected an error containing "other", found "some error"');
+      expect(() => expect(thrower).toThrow(/other/)).toThrow();
+      expect(() => expect(thrower).toThrow(new Error('some'))).toThrow();
     });
 
     it('handles .not correctly (no throw, empty message)', () => {

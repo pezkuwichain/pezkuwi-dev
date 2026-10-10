@@ -280,6 +280,51 @@ function assertIncludes (value: string | unknown[], [check, Clazz]: [string | un
 }
 
 /**
+ * @internal
+ *
+ * As .toThrow(check) has it: a string is contained in the message, a RegExp
+ * matches it, an Error has the same message. Returns true, as the validation
+ * functions of assert.throws and assert.rejects must
+ */
+function assertErrorMatches (error: unknown, check?: RegExp | Error | string): true {
+  const message = error instanceof Error
+    ? error.message
+    : String(error);
+
+  if (typeof check === 'string') {
+    assert.ok(message.includes(check), `Expected an error containing "${check}", found "${message}"`);
+  } else if (check instanceof RegExp) {
+    assert.match(message, check);
+  } else if (check) {
+    assert.strictEqual(message, check.message);
+  }
+
+  return true;
+}
+
+/**
+ * @internal
+ *
+ * As .toHaveProperty(path, expected?) has it: the (dotted or array) path
+ * exists, and when an expected value is given, equals it
+ */
+function assertHasProperty (value: unknown, path: string | string[], expected: unknown[]): void {
+  const keys = Array.isArray(path)
+    ? path
+    : path.split('.');
+  let current = value;
+
+  for (const key of keys) {
+    assert.ok(current !== null && current !== undefined && key in Object(current), `Expected a property at "${keys.join('.')}"`);
+    current = (current as Record<string, unknown>)[key];
+  }
+
+  if (expected.length) {
+    assertEqualMatch(current, expected[0]);
+  }
+}
+
+/**
  * Sets up the shimmed expect(...) function, including all .to* and .not.to*
  * functions. This is not comprehensive, rather is contains what we need to
  * make all pezkuwi-js usages pass
@@ -301,17 +346,18 @@ export function expect () {
         not: enhanceObj({
           toBe: (other: unknown) => assert.notStrictEqual(value, other),
           toBeDefined: () => assert.ok(value === undefined),
-          toBeNull: (value: unknown) => assert.ok(value !== null),
+          toBeNull: () => assert.ok(value !== null, 'Expected a value other than null'),
           toBeUndefined: () => assert.ok(value !== undefined),
           toContain: (item: unknown) => assertNotContains(value, item),
           toEqual: (other: unknown) => containsMatcher(other)
             ? assert.throws(() => assertEqualMatch(value, other))
             : assert.notDeepEqual(value, other),
           toHaveBeenCalled: () => assert.ok(!(value as Mocked | undefined)?.mock?.calls.length),
+          toHaveLength: (length: number) => assert.notEqual((value as unknown[] | undefined)?.length, length),
           toThrow: (message?: RegExp | Error | string) => assert.doesNotThrow(value as () => unknown, message && { message } as Error)
         }, stubExpectFnNot),
         rejects: enhanceObj({
-          toThrow: (message?: RegExp | Error | string) => assert.rejects(value as Promise<unknown>, message && { message } as Error)
+          toThrow: (check?: RegExp | Error | string) => assert.rejects(value as Promise<unknown>, (error) => assertErrorMatches(error, check))
         }, stubExpectFnRejects),
         resolves: enhanceObj({}, stubExpectFnResolves),
         toBe: (other: unknown) => assert.strictEqual(value, other),
@@ -319,7 +365,7 @@ export function expect () {
         toBeFalsy: () => assert.ok(!value),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
         toBeInstanceOf: (Clazz: Function) => assertInstanceOf(value, Clazz),
-        toBeNull: (value: unknown) => assert.ok(value === null),
+        toBeNull: () => assert.ok(value === null, `Expected null, found ${String(value)}`),
         toBeTruthy: () => assert.ok(value),
         toBeUndefined: () => assert.ok(value === undefined),
         toContain: (item: unknown) => assertContains(value, item),
@@ -331,9 +377,10 @@ export function expect () {
         toHaveBeenCalledWith: (...args: unknown[]) => assertSomeCallHasArgs((value as Mocked | undefined), args),
         toHaveBeenLastCalledWith: (...args: unknown[]) => assertCallHasArgs((value as Mocked | undefined)?.mock?.calls.at(-1), args),
         toHaveLength: (length: number) => assert.equal((value as unknown[] | undefined)?.length, length),
+        toHaveProperty: (path: string | string[], ...expected: unknown[]) => assertHasProperty(value, path, expected),
         toMatch: (check: string | RegExp) => assertMatchStr(value, check),
         toMatchObject: (check: object) => assertMatchObj(value, check),
-        toThrow: (message?: RegExp | Error | string) => assert.throws(value as () => unknown, message && { message } as Error)
+        toThrow: (check?: RegExp | Error | string) => assert.throws(value as () => unknown, (error) => assertErrorMatches(error, check))
       }, stubExpectFn), rootMatchers), stubExpect)
   };
 }
