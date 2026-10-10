@@ -38,6 +38,7 @@
     "@pezkuwi/dev-ts": "workspace:packages/dev-ts"
   },
   "resolutions": {
+    "braces": "npm:@pezkuwi/braces@^3.0.4",
     "typescript": "^5.5.4"
   }
 }
