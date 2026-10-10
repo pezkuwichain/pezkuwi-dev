@@ -219,4 +219,40 @@ describe('expect', () => {
       });
     });
   });
+
+  describe('asymmetric matchers in .toEqual', () => {
+    it('matches an array containing all expected entries, in any order', () => {
+      expect([1, 2, 3]).toEqual(expect.arrayContaining([3, 1]));
+      expect(['a', 'b']).toEqual(expect.arrayContaining(['b', 'a']));
+    });
+
+    it('fails when an expected entry is missing', () => {
+      expect(() => expect([1, 2]).toEqual(expect.arrayContaining([3]))).toThrow();
+    });
+
+    it('compares array entries deeply', () => {
+      expect([{ a: 1 }, { b: 2 }]).toEqual(expect.arrayContaining([{ b: 2 }]));
+      expect(() => expect([{ a: 1 }]).toEqual(expect.arrayContaining([{ a: 2 }]))).toThrow();
+    });
+
+    it('matches a string containing the expected part', () => {
+      expect('hello world').toEqual(expect.stringContaining('lo w'));
+      expect(() => expect('hello').toEqual(expect.stringContaining('xyz'))).toThrow();
+    });
+
+    it('applies matchers nested in objects and arrays', () => {
+      expect({ a: [1, 2], b: 'x' }).toEqual({ a: expect.arrayContaining([2]), b: 'x' });
+      expect([{ a: 'xyz' }]).toEqual([{ a: expect.stringContaining('y') }]);
+      expect(() => expect({ a: [1], b: 'x' }).toEqual({ a: expect.arrayContaining([2]), b: 'x' })).toThrow();
+    });
+
+    it('still requires equal keys around a nested matcher', () => {
+      expect(() => expect({ a: [1], b: 'x', c: 1 }).toEqual({ a: expect.arrayContaining([1]), b: 'x' })).toThrow();
+    });
+
+    it('supports .not with a matcher', () => {
+      expect([1, 2]).not.toEqual(expect.arrayContaining([3]));
+      expect(() => expect([1, 2]).not.toEqual(expect.arrayContaining([2]))).toThrow();
+    });
+  });
 });
