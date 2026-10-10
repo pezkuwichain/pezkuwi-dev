@@ -22,8 +22,12 @@ export function browser () {
   const { window } = new JSDOM('', { url: 'http://localhost' });
 
   return {
-    // Event constructors, see BROWSER_OVERRIDES
+    // The DOM node hierarchy, which libraries check with instanceof, and the
+    // event constructors (Node has its own of these, see BROWSER_OVERRIDES)
     CustomEvent: window.CustomEvent,
+    Document: window.Document,
+    DocumentFragment: window.DocumentFragment,
+    Element: window.Element,
     Event: window.Event,
     // All HTML Elements that are defined on the JSDOM window object.
     // (we copied as-is from the types definition). We cannot get this
@@ -99,6 +103,11 @@ export function browser () {
     HTMLUListElement: window.HTMLUListElement,
     HTMLUnknownElement: window.HTMLUnknownElement,
     HTMLVideoElement: window.HTMLVideoElement,
+    // the rest of the node hierarchy
+    Node: window.Node,
+    SVGElement: window.SVGElement,
+    ShadowRoot: window.ShadowRoot,
+    Text: window.Text,
     // normal service resumes, the base top-level names
     crypto: window.crypto,
     document: window.document,

@@ -24,6 +24,18 @@ describe('browser', () => {
     expect(typeof all.HTMLElement).toBe('function');
   });
 
+  it('contains the DOM node hierarchy', () => {
+    const div = document.createElement('div');
+
+    expect(div).toBeInstanceOf(Element);
+    expect(div).toBeInstanceOf(Node);
+    expect(document.createTextNode('text')).toBeInstanceOf(Text);
+    expect(document.createDocumentFragment()).toBeInstanceOf(DocumentFragment);
+    expect(document.createElementNS('http://www.w3.org/2000/svg', 'svg')).toBeInstanceOf(SVGElement);
+    expect(div.attachShadow({ mode: 'open' })).toBeInstanceOf(ShadowRoot);
+    expect(document).toBeInstanceOf(Document);
+  });
+
   it('dispatches the global CustomEvent and Event on window', () => {
     expect(() => window.dispatchEvent(new CustomEvent('custom', { detail: 1 }))).not.toThrow();
     expect(() => window.dispatchEvent(new Event('plain'))).not.toThrow();

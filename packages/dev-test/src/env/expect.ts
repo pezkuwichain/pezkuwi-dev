@@ -147,6 +147,40 @@ function assertMatchObj (value: unknown, check: object): void {
 /**
  * @internal
  *
+ * Whether a string contains the substring, or another iterable the item
+ */
+function contains (value: unknown, item: unknown): boolean {
+  if (typeof value === 'string') {
+    return typeof item === 'string' && value.includes(item);
+  }
+
+  assert.ok(typeof (value as Iterable<unknown> | null | undefined)?.[Symbol.iterator] === 'function', `Expected a string or an iterable, found ${typeof value}`);
+
+  return [...(value as Iterable<unknown>)].includes(item);
+}
+
+/**
+ * @internal
+ *
+ * A helper for toContain: a string contains the substring, any other
+ * iterable contains the item itself (not a deep-equal copy)
+ */
+function assertContains (value: unknown, item: unknown): void {
+  assert.ok(contains(value, item), `Expected ${String(value)} to contain ${String(item)}`);
+}
+
+/**
+ * @internal
+ *
+ * The inverse of assertContains
+ */
+function assertNotContains (value: unknown, item: unknown): void {
+  assert.ok(!contains(value, item), `Expected ${String(value)} not to contain ${String(item)}`);
+}
+
+/**
+ * @internal
+ *
  * A helper to match a string value against another string or regex
  */
 function assertMatchStr (value: unknown, check: string | RegExp): void {
@@ -269,6 +303,7 @@ export function expect () {
           toBeDefined: () => assert.ok(value === undefined),
           toBeNull: (value: unknown) => assert.ok(value !== null),
           toBeUndefined: () => assert.ok(value !== undefined),
+          toContain: (item: unknown) => assertNotContains(value, item),
           toEqual: (other: unknown) => containsMatcher(other)
             ? assert.throws(() => assertEqualMatch(value, other))
             : assert.notDeepEqual(value, other),
@@ -287,6 +322,7 @@ export function expect () {
         toBeNull: (value: unknown) => assert.ok(value === null),
         toBeTruthy: () => assert.ok(value),
         toBeUndefined: () => assert.ok(value === undefined),
+        toContain: (item: unknown) => assertContains(value, item),
         toEqual: (other: unknown) => containsMatcher(other)
           ? assertEqualMatch(value, other)
           : assert.deepEqual(value, other),
