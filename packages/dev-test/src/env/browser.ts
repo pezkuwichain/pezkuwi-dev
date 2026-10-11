@@ -9,8 +9,13 @@ import { JSDOM } from 'jsdom';
  * Constructors that Node defines as well. A DOM node only accepts an event
  * created in its own realm, so in the browser environment the JSDOM ones
  * replace Node's, as they do under jest-environment-jsdom.
+ *
+ * WebSocket follows from that: Node's own dispatches its events through
+ * Node's EventTarget, which rejects the JSDOM Event that replaced Node's, so
+ * no open, message or error ever reaches a listener and a connection never
+ * comes up. JSDOM's WebSocket dispatches events from its own realm.
  */
-export const BROWSER_OVERRIDES: readonly string[] = ['CustomEvent', 'Event'];
+export const BROWSER_OVERRIDES: readonly string[] = ['CustomEvent', 'Event', 'WebSocket'];
 
 /**
  * JSDOM does no layout, so no element ever changes size and the callback
@@ -62,6 +67,13 @@ function events (window: DOMWindow) {
   };
 }
 
+/** Network, see BROWSER_OVERRIDES for why WebSocket is JSDOM's */
+function network (window: DOMWindow) {
+  return {
+    WebSocket: window.WebSocket
+  };
+}
+
 /** Styles, geometry and the observers */
 function layout (window: DOMWindow) {
   return {
@@ -90,6 +102,7 @@ export function browser () {
     ...nodes(window),
     ...events(window),
     ...layout(window),
+    ...network(window),
     // All HTML Elements that are defined on the JSDOM window object.
     // (we copied as-is from the types definition). We cannot get this
     // via Object.keys(window).filter(...) so we have to specify explicitly
@@ -168,6 +181,7 @@ export function browser () {
     crypto: window.crypto,
     document: window.document,
     localStorage: window.localStorage,
+    location: window.location,
     navigator: window.navigator,
     // window...
     window

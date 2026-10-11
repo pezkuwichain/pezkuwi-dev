@@ -4,6 +4,7 @@
 
 import JSON5 from 'json5';
 import fs from 'node:fs';
+import { builtinModules } from 'node:module';
 import path from 'node:path';
 import process from 'node:process';
 import ts from 'typescript';
@@ -32,8 +33,9 @@ const TARGET_TSES = ts.ScriptTarget.ES2022;
 const TARGET_NODE = '>=18';
 
 const IGNORE_IMPORTS = [
-  // node (new-style)
-  ...['assert', 'child_process', 'crypto', 'fs', 'module', 'os', 'path', 'process', 'readline', 'test', 'url', 'util'].map((m) => `node:${m}`),
+  // node (new-style): every builtin, none of them is a package.json dependency.
+  // Some are listed with the prefix already (node:test, node:sqlite).
+  ...builtinModules.map((m) => m.startsWith('node:') ? m : `node:${m}`),
   // other
   '@testing-library/react',
   'react', 'react-native', 'styled-components'
