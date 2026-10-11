@@ -21,6 +21,7 @@ describe('browser', () => {
   it('contains the top-level objects', () => {
     expect(all.document).toBeDefined();
     expect(all.navigator).toBeDefined();
+    expect(location.href).toBe('http://localhost/');
   });
 
   it('contains HTML*Element', () => {

@@ -181,6 +181,7 @@ export function browser () {
     crypto: window.crypto,
     document: window.document,
     localStorage: window.localStorage,
+    location: window.location,
     navigator: window.navigator,
     // window...
     window
