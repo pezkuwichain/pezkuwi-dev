@@ -4,6 +4,11 @@ on:
     branches:
       - master
 
+
+# Writes go through a separate bot token or app token; GITHUB_TOKEN stays read-only.
+permissions:
+  contents: read
+
 jobs:
   master:
     if: "! startsWith(github.event.head_commit.message, '[CI Skip]')"

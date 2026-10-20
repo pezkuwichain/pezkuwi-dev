@@ -4,6 +4,13 @@ on:
   schedule:
     - cron: '30 1/3 * * *'
 
+
+# dessant/lock-threads locks closed issues, PRs and discussions.
+permissions:
+  issues: write
+  pull-requests: write
+  discussions: write
+
 jobs:
   lock:
     runs-on: ubuntu-latest

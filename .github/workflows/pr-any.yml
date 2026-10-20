@@ -1,6 +1,11 @@
 name: PR
 on: [pull_request]
 
+
+# Read-only token: no step writes through GITHUB_TOKEN.
+permissions:
+  contents: read
+
 jobs:
   pr:
     strategy:
