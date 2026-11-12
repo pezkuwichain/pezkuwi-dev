@@ -1,5 +1,5 @@
 {
-  "author": "Pezkuwi Team <team@pezkuwichain.app>",
+  "author": "Pezkuwi Team <team@pezkuwichain.io>",
   "bugs": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/issues",
   "description": "A basic test-functions-as-global library on top of node:test",
   "engines": {

@@ -1,5 +1,5 @@
 {
-  "author": "Pezkuwi Team <team@pezkuwichain.app>",
+  "author": "Pezkuwi Team <team@pezkuwichain.io>",
   "bugs": "https://git.pezkuwichain.io/pezkuwichain/pezkuwi-dev/issues",
   "description": "An TS -> ESM loader for Node >= 16.12",
   "engines": {
