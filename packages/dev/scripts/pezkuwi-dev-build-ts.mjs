@@ -9,7 +9,7 @@ import path from 'node:path';
 import process from 'node:process';
 import ts from 'typescript';
 
-import { copyDirSync, copyFileSync, DENO_EXT_PRE, DENO_LND_PRE, DENO_POL_PRE, engineVersionCmp, execPm, exitFatal, exitFatalEngine, logBin, mkdirpSync, PATHS_BUILD, readdirSync, rimrafSync } from './util.mjs';
+import { copyDirSync, copyFileSync, DENO_EXT_PRE, DENO_LND_PRE, DENO_POL_PRE, engineVersionCmp, execPm, exitFatal, exitFatalEngine, logBin, mkdirpSync, packageHomepage, PATHS_BUILD, readdirSync, rimrafSync } from './util.mjs';
 
 /** @typedef {'babel' | 'esbuild' | 'swc' | 'tsc'} CompileType */
 /** @typedef {{ bin?: Record<string, string>; browser?: string; bugs?: string; deno?: string; denoDependencies?: Record<string, string>; dependencies?: Record<string, string>; devDependencies?: Record<string, string>; electron?: string; engines?: { node?: string }; exports?: Record<string, unknown>; license?: string; homepage?: string; main?: string; module?: string; name?: string; optionalDependencies?: Record<string, string>; peerDependencies?: Record<string, string>; repository?: { directory?: string; type: 'git'; url: string; }; 'react-native'?: string; resolutions?: Record<string, string>; sideEffects?: boolean | string[]; scripts?: Record<string, string>; type?: 'module' | 'commonjs'; types?: string; version?: string; }} PkgJson */
@@ -973,7 +973,7 @@ function repoBaseFromUrl (url) {
  */
 function orderPackageJson (repoBase, dir, json) {
   json.bugs = `${repoBase}/issues`;
-  json.homepage = `${repoBase}${dir ? `/tree/master/packages/${dir}` : ''}#readme`;
+  json.homepage = packageHomepage(repoBase, dir, json.homepage);
   json.license = !json.license || json.license === 'Apache-2'
     ? 'Apache-2.0'
     : json.license;
