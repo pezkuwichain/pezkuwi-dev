@@ -4,22 +4,22 @@ on:
   schedule:
     - cron: '30 1/3 * * *'
 
-
-# dessant/lock-threads locks closed issues, PRs and discussions.
-permissions:
-  issues: write
-  pull-requests: write
-  discussions: write
+permissions: {}
 
 jobs:
   lock:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      issues: write
+      pull-requests: write
     env:
       YARN_ENABLE_SCRIPTS: false
     steps:
-      - uses: dessant/lock-threads@c1b35aecc5cdb1a34539d14196df55838bb2f836
+      - uses: dessant/lock-threads@89ae32b08ed1a541efecbab17912962a5e38981c # v6.0.2
         with:
           github-token: ${{ github.token }}
+          process-only: 'issues, prs'
           issue-inactive-days: '7'
           issue-comment: >
             This thread has been automatically locked since there has not been
