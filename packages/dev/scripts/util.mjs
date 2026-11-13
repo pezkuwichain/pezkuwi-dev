@@ -147,6 +147,24 @@ export function engineVersionSplit (ver) {
 }
 
 /**
+ * The homepage written into a package.json. One the author pointed outside the
+ * repository (an API reference, a product site) is kept; anything else, and an
+ * absent one, is derived from the repository.
+ *
+ * @param {string} repoBase e.g. https://git.example.org/owner/repo
+ * @param {string | null} dir package directory under packages/, null for the root
+ * @param {string} [current] the homepage the package.json carries now
+ * @returns {string}
+ */
+export function packageHomepage (repoBase, dir, current) {
+  const inRepo = !current || current === repoBase || current.startsWith(`${repoBase}/`) || current.startsWith(`${repoBase}#`);
+
+  return inRepo
+    ? `${repoBase}${dir ? `/tree/master/packages/${dir}` : ''}#readme`
+    : current;
+}
+
+/**
  * Process execution
  *
  * @param {string} cmd
